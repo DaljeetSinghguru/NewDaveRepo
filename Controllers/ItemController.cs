@@ -56,10 +56,11 @@ namespace Slimapi.Controllers
                 var Price = httpRequest.Form.Get(6);
                 var Title = httpRequest.Form.Get(7);
                 var StockInHand = httpRequest.Form.Get(8);
+                var VAT = httpRequest.Form.Get(9);
                 string msg = "";
 
                 msg = new Item_Models().InsertItemIntoDB(filename[0], filename[1], filename[2], filepathname[0], filepathname[1], filepathname[2],
-                    ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand);
+                    ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand,VAT);
 
                 if (msg != "")
                 {
@@ -152,9 +153,10 @@ namespace Slimapi.Controllers
             var Title = httpRequest.Form.Get(7);
             var StockInHand = httpRequest.Form.Get(8);
             var ItemId = httpRequest.Form.Get(9);
+            var VAT = httpRequest.Form.Get(10);
             string msg = "";
 
-            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId);
+            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId,VAT);
 
             if (msg != "")
             {

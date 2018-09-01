@@ -27,7 +27,7 @@ namespace TaskAPI.Models
         }
 
         public string InsertItemIntoDB(string filename1, string filename2, string filename3, string filepathname1, string filepathname2, string filepathname3,
-                string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand)
+                string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand,string VAT)
         {
             string msg = "";
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
@@ -47,13 +47,14 @@ namespace TaskAPI.Models
             command.Parameters.AddWithValue("@ItemMainImageUrl1", filepathname2);
             command.Parameters.AddWithValue("@ItemMainImageUrl2", filepathname3);
             command.Parameters.AddWithValue("@StockInHand", StockInHand);
+            command.Parameters.AddWithValue("@VAT", VAT);
             con.Open();
             command.ExecuteNonQuery();
             con.Close();
 
             return msg;
         }
-        public string UpdateItemIntoDB(string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId)
+        public string UpdateItemIntoDB(string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId,string VAT)
         {
             string msg = "";
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
@@ -68,6 +69,7 @@ namespace TaskAPI.Models
             command.Parameters.AddWithValue("@Price", Price);
             command.Parameters.AddWithValue("@StockInHand", StockInHand);
             command.Parameters.AddWithValue("@ItemId", ItemId);
+            command.Parameters.AddWithValue("@VAT", VAT);
             con.Open();
             command.ExecuteNonQuery();
             con.Close();
