@@ -526,3 +526,11 @@ D:\CODE DAVE\sapi\bin\TaskAPI.dll
 D:\CODE DAVE\sapi\bin\TaskAPI.pdb
 D:\CODE DAVE\sapi\bin\Newtonsoft.Json.dll
 D:\CODE DAVE\sapi\obj\Debug\TaskAPI.csproj.CopyComplete
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.dll.config
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.dll
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.pdb
+F:\xxxx\DAPI\NewDaveRepo\bin\Newtonsoft.Json.dll
+F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.csprojResolveAssemblyReference.cache
+F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.csproj.CoreCompileInputs.cache
+F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.dll
+F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.pdb
