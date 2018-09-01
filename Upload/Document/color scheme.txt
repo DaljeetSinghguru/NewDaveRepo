@@ -1,0 +1,77 @@
+if (lblIsRead.Text == "True" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date)
+                    {
+                        //e.Row.Attributes.Add("Style", "font-weight: bold; color: red;");
+                    }
+                    if (lblIsRead.Text != "True" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date)
+                    {
+                        e.Row.Attributes.Add("Style", "color: red;");
+                    }
+                    if (lblStatusId.Text == "3" && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "color: green;");
+                    }
+                    else if (lblStatusId.Text == "3" && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "color: green; font-weight: bold;");
+                    }
+
+                    if (lblStepsId.Text == "7" && lblStatusId.Text == "3" && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00; color: green;");
+                    }
+                    else if (lblStepsId.Text == "7" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00; color: red;");
+                    }
+                    else if (lblStepsId.Text == "7" && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00;");
+                    }
+
+
+
+
+                    else if (lblStepsId.Text == "7" && lblStatusId.Text == "3" && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00; color: green; font-weight: bold;");
+                    }
+                    else if (lblStepsId.Text == "7" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00; color: red; font-weight: bold;");
+                    }
+                    else if (lblStepsId.Text == "7" && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #FFFF00; font-weight: bold;");
+                    }
+
+
+
+
+
+
+                    if (lblActive.Text == "False" && lblStatusId.Text == "3" && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA; color: green;");
+                    }
+                    else if (lblActive.Text == "False" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA; color: red;");
+                    }
+                    else if (lblActive.Text == "False" && lblIsRead.Text != "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA;");
+                    }
+
+
+                    else if (lblActive.Text == "False" && lblStatusId.Text == "3" && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA; color: green; font-weight: bold;");
+                    }
+                    else if (lblActive.Text == "False" && (Convert.ToDateTime(lblTargetDateTime.Text)).Date < (DateTime.Now).Date && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA; color: red; font-weight: bold;");
+                    }
+                    else if (lblActive.Text == "False" && lblIsRead.Text == "True")
+                    {
+                        e.Row.Attributes.Add("Style", "background: #DEDBDA; font-weight: bold;");
+                    }

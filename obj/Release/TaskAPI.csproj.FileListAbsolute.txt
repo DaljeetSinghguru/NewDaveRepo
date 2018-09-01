@@ -1,0 +1,46 @@
+E:\dsg\25082018\TASKDS\TaskAPI\bin\TaskAPI.dll.config
+E:\dsg\25082018\TASKDS\TaskAPI\bin\TaskAPI.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\TaskAPI.pdb
+E:\dsg\25082018\TASKDS\TaskAPI\bin\Antlr3.Runtime.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\EntityFramework.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\Microsoft.Web.Infrastructure.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\Newtonsoft.Json.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Net.Http.Formatting.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Cors.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Helpers.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.Cors.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.WebHost.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Mvc.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Optimization.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Providers.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Razor.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.Deployment.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.Razor.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\WebGrease.dll
+E:\dsg\25082018\TASKDS\TaskAPI\bin\Newtonsoft.Json.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Net.Http.Formatting.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.Cors.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Http.WebHost.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\EntityFramework.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Helpers.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Mvc.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.Razor.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.Deployment.xml
+E:\dsg\25082018\TASKDS\TaskAPI\bin\System.Web.WebPages.Razor.xml
+E:\dsg\25082018\TASKDS\TaskAPI\obj\Release\TaskAPI.csprojResolveAssemblyReference.cache
+E:\dsg\25082018\TASKDS\TaskAPI\obj\Release\TaskAPI.csproj.CoreCompileInputs.cache
+E:\dsg\25082018\TASKDS\TaskAPI\obj\Release\TaskAPI.csproj.CopyComplete
+E:\dsg\25082018\TASKDS\TaskAPI\obj\Release\TaskAPI.dll
+E:\dsg\25082018\TASKDS\TaskAPI\obj\Release\TaskAPI.pdb
+D:\CODE DAVE\sapi\bin\TaskAPI.dll.config
+D:\CODE DAVE\sapi\bin\TaskAPI.dll
+D:\CODE DAVE\sapi\bin\TaskAPI.pdb
+D:\CODE DAVE\sapi\bin\Newtonsoft.Json.dll
+D:\CODE DAVE\sapi\obj\Release\TaskAPI.csproj.CoreCompileInputs.cache
+D:\CODE DAVE\sapi\obj\Release\TaskAPI.csproj.CopyComplete
+D:\CODE DAVE\sapi\obj\Release\TaskAPI.dll
+D:\CODE DAVE\sapi\obj\Release\TaskAPI.pdb
