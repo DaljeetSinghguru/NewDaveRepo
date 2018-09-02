@@ -11,6 +11,7 @@ namespace TaskAPI.Models
 
         public DataTable Category_Find(string Active)
         {
+            if (Active == null) { Active = ""; }
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             con.Open();
@@ -36,10 +37,12 @@ namespace TaskAPI.Models
             SqlCommand cmd = new SqlCommand("Category_Insert", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CategoryName", obj.CategoryName);
+            cmd.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            cmd.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
             //cmd.Parameters.AddWithValue("@SequenceNo", obj.SequenceNo);
-            //cmd.Parameters.AddWithValue("@Active", obj.Active);
-          //  cmd.Parameters.Add("@Return", SqlDbType.Int).Value = "";
-          //  cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
+            cmd.Parameters.AddWithValue("@Active", obj.Active);
+            //  cmd.Parameters.Add("@Return", SqlDbType.Int).Value = "";
+            //  cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -48,12 +51,16 @@ namespace TaskAPI.Models
         }
         public string Category_Update(Category_Class obj)
         {
+            if (obj.Active == "True") { obj.Active = "1"; } else { obj.Active = "0"; }
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand cmd = new SqlCommand("Category_Update", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CategoryId", obj.CategoryId);
             cmd.Parameters.AddWithValue("@CategoryName", obj.CategoryName);
-
+            cmd.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            cmd.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
+            //cmd.Parameters.AddWithValue("@SequenceNo", obj.SequenceNo);
+            cmd.Parameters.AddWithValue("@Active", obj.Active);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();

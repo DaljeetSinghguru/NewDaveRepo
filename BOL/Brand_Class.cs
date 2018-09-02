@@ -9,6 +9,8 @@ namespace TaskAPI.BOL
         public string BrandId { get; set; }
         public string BrandName { get; set; }
         public string SequenceNo { get; set; }
+        public string SearchKeyword { get; set; }
+        public string MetaDescription { get; set; }
         public string Active { get; set; }
         public string RowId { get; set; }
     }

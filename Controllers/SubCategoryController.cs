@@ -42,6 +42,9 @@ namespace TaskAPI.Controllers
                     {
                         SubCategoryId = Convert.ToString(dr["SubCategoryId"]),
                         SubCategoryName = Convert.ToString(dr["SubCategoryName"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+
                         CategoryId = Convert.ToString(dr["CategoryId"]),
                         Category = Convert.ToString(dr["Category Name"]),
 
@@ -69,7 +72,9 @@ namespace TaskAPI.Controllers
                         SubCategoryName = Convert.ToString(dr["SubCategoryName"]),
                         CategoryId = Convert.ToString(dr["CategoryId"]),
                         Category = Convert.ToString(dr["Category Name"]),
-                        
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+
                         Active = Convert.ToString(dr["Active"])
                     });
                 }

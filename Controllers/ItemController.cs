@@ -57,10 +57,16 @@ namespace Slimapi.Controllers
                 var Title = httpRequest.Form.Get(7);
                 var StockInHand = httpRequest.Form.Get(8);
                 var VAT = httpRequest.Form.Get(9);
+                var SearchKeyword = httpRequest.Form.Get(10);
+                var MetaDescription = httpRequest.Form.Get(11);
+                var Active = httpRequest.Form.Get(12);
+
                 string msg = "";
 
-                msg = new Item_Models().InsertItemIntoDB(filename[0], filename[1], filename[2], filepathname[0], filepathname[1], filepathname[2],
-                    ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand,VAT);
+                msg = new Item_Models().InsertItemIntoDB(filename[0], filename[1], filename[2], filename[3], filename[4], filename[5], filepathname[0], filepathname[1], filepathname[2],
+                    filepathname[3], filepathname[4], filepathname[5],
+                    ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, 
+                    StockInHand,VAT, SearchKeyword, MetaDescription,Active);
 
                 if (msg != "")
                 {
@@ -125,6 +131,10 @@ namespace Slimapi.Controllers
                         CategoryName = Convert.ToString(dr["CategoryName"]),
                         StockInHand = Convert.ToString(dr["StockInHand"]),
                         SubCategoryName = Convert.ToString(dr["SubCategoryName"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        Vat = Convert.ToString(dr["Vat"]),
                     });
                 }
             }
@@ -154,9 +164,12 @@ namespace Slimapi.Controllers
             var StockInHand = httpRequest.Form.Get(8);
             var ItemId = httpRequest.Form.Get(9);
             var VAT = httpRequest.Form.Get(10);
+            var SearchKeyword = httpRequest.Form.Get(11);
+            var MetaDescription = httpRequest.Form.Get(12);
+            var Active = httpRequest.Form.Get(13);
             string msg = "";
 
-            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId,VAT);
+            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId,VAT, SearchKeyword, MetaDescription,Active);
 
             if (msg != "")
             {

@@ -25,6 +25,7 @@ namespace TaskAPI.Models
         }
         public DataTable Brand_Find(string Active)
         {
+            if (Active == null) { Active = ""; }
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             con.Open();
@@ -77,8 +78,10 @@ namespace TaskAPI.Models
             string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
             return Return;
         }
-        public string InsertBrandIntoDB(string filename, string ImageUrl, string Brand)
+        public string InsertBrandIntoDB(string filename, string ImageUrl, string Brand, string SearchKeyword,string MetaDescription,string Active)
         {
+            if (Active == "true") {Active = "1"; } else {Active = "0"; }
+
             string msg = "";
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand command = new SqlCommand("sp_UpdateBrandImage", con);
@@ -86,6 +89,9 @@ namespace TaskAPI.Models
             command.Parameters.Add("@Brand", SqlDbType.VarChar).Value = Brand;
             command.Parameters.Add("@filename", SqlDbType.VarChar).Value = filename;
             command.Parameters.Add("@ImageUrl", SqlDbType.VarChar).Value = ImageUrl;
+            command.Parameters.Add("@MetaDescription", SqlDbType.VarChar).Value = MetaDescription;
+            command.Parameters.Add("@SearchKeyword", SqlDbType.VarChar).Value = SearchKeyword;
+            command.Parameters.Add("@Active", SqlDbType.VarChar).Value = Active;
 
             con.Open();
             command.ExecuteNonQuery();
