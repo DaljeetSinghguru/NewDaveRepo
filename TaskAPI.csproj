@@ -222,10 +222,10 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\AdobePDFFormat.png" />
     <Content Include="Images\ExcelFormat.png" />
-    <Content Include="Images\ImageFormat.png" />
     <Content Include="Images\Note.png" />
     <Content Include="Images\WordFormat.png" />
     <Content Include="Index.html" />

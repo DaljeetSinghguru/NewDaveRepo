@@ -21,33 +21,18 @@ namespace Slimapi.Controllers
 
         [HttpPost]
 
-        public HttpResponseMessage InsertItemData()
+        public string InsertItemData()
         {
             string[] filename = new string[10];
             string[] filepathname = new string[10];
             int i = 0;
-            HttpResponseMessage result = null;
+            string result = null;
             var httpRequest = HttpContext.Current.Request;
             //if (httpRequest.Files.Count > 0)
             //{
             var docfiles = new List<string>();
-            //foreach (string file in httpRequest.Files)
-            //{
-            //    var postedFile = httpRequest.Files[file];
-            //    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
-
-            //    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
-            //    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
-            //    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
-            //    postedFile.SaveAs(filePath);
-
-            //    docfiles.Add(filePath);
-            //    filename[i] = Convert.ToString(filenameWithHrUserId);
-            //    filepathname[i] = Convert.ToString(filePath);
-            //    i = i + 1;
-
-            //}
-            result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+           
+            result = "";
             var ItemName = httpRequest.Form.Get(0);
             var CategoryId = httpRequest.Form.Get(1);
             var BrandId = httpRequest.Form.Get(2);
@@ -72,13 +57,13 @@ namespace Slimapi.Controllers
 
             if (msg != "")
             {
-                result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                result = "Data Insert";
             }
             //return data;
             //}
             else
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = "Data not inserted ";
             }
             return result;
         }
