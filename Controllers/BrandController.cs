@@ -33,6 +33,8 @@ namespace TaskAPI.Controllers
                         RowId = Convert.ToString(dr["RowId"]),
                         BrandId = Convert.ToString(dr["BrandId"]),
                         BrandName = Convert.ToString(dr["BrandName"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
                         SequenceNo = Convert.ToString(dr["SequenceNo"]),
                         Active = Convert.ToString(dr["Active"])
                     });
@@ -96,10 +98,12 @@ namespace TaskAPI.Controllers
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
                 var BrandName = httpRequest.Form.Get(0);
-
+                var SearchKeyword = httpRequest.Form.Get(1);
+                var MetaDescription = httpRequest.Form.Get(2);
+                var Active = httpRequest.Form.Get(3);
                 string msg = "";
 
-                msg = new Brand_Models().InsertBrandIntoDB(filename[0], filepathname[0], BrandName);
+                msg = new Brand_Models().InsertBrandIntoDB(filename[0], filepathname[0], BrandName, SearchKeyword, MetaDescription, Active);
 
                 if (msg != "")
                 {

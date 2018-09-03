@@ -11,6 +11,7 @@ namespace TaskAPI.Models
 
         public DataTable SubCategory_Find(string Active)
         {
+            if (Active == null) { Active = ""; }
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             con.Open();
@@ -31,11 +32,16 @@ namespace TaskAPI.Models
         }
         public string SubCategory_Insert(SubCategory_Class obj)
         {
+            if (obj.Active == "True") { obj.Active = "1"; } else { obj.Active = "0"; }
+
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand cmd = new SqlCommand("SubCategory_Insert", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@SubCategoryName", obj.SubCategoryDescription);
             cmd.Parameters.AddWithValue("@CategoryId", obj.Category);
+            cmd.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
+            cmd.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            cmd.Parameters.AddWithValue("@Active", obj.Active);
 
 
             con.Open();
@@ -46,12 +52,17 @@ namespace TaskAPI.Models
         }
         public string SubCategory_Update(SubCategory_Class obj)
         {
+            if (obj.Active == "True") { obj.Active = "1"; } else { obj.Active = "0"; }
+
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand cmd = new SqlCommand("SubCategory_Update", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@SubCategoryId", obj.SubCategoryId);
             cmd.Parameters.AddWithValue("@SubCategoryName", obj.SubCategoryDescription);
             cmd.Parameters.AddWithValue("@CategoryId", obj.CategoryId);
+            cmd.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
+            cmd.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            cmd.Parameters.AddWithValue("@Active", obj.Active);
 
             con.Open();
             cmd.ExecuteNonQuery();

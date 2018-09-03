@@ -11,6 +11,7 @@ namespace TaskAPI.Models
 
         public string InsertBrandIntoDB(string filename, string ImageUrl, string Brand)
         {
+
             string msg = "";
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand command = new SqlCommand("sp_UpdateBrandImage", con);
@@ -26,10 +27,13 @@ namespace TaskAPI.Models
             return msg;
         }
 
-        public string InsertItemIntoDB(string filename1, string filename2, string filename3, string filepathname1, string filepathname2, string filepathname3,
-                string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand,string VAT)
+        public string InsertItemIntoDB(string filename1, string filename2, string filename3, string filename4, string filename5, string filename6, string filepathname1, string filepathname2, string filepathname3,
+             string filepathname4, string filepathname5, string filepathname6,
+                string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand,
+                string VAT,string SearchKeyword, string MetaDescription,string Active)
         {
             string msg = "";
+            if (Active == "true") {Active = "1"; } else { Active = "0"; }
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand command = new SqlCommand("sp_InsertUpdateItemData", con);
             command.CommandType = CommandType.StoredProcedure;
@@ -42,21 +46,34 @@ namespace TaskAPI.Models
             command.Parameters.AddWithValue("@ItemMainImage", filename1);
             command.Parameters.AddWithValue("@ItemImage1", filename2);
             command.Parameters.AddWithValue("@ItemImage2", filename3);
+            command.Parameters.AddWithValue("@ItemImage4", filename4);
+            command.Parameters.AddWithValue("@ItemImage5", filename5);
+            command.Parameters.AddWithValue("@ItemImage6", filename6);
             command.Parameters.AddWithValue("@Price", Price);
             command.Parameters.AddWithValue("@ItemMainImageUrl", filepathname1);
             command.Parameters.AddWithValue("@ItemMainImageUrl1", filepathname2);
             command.Parameters.AddWithValue("@ItemMainImageUrl2", filepathname3);
+            command.Parameters.AddWithValue("@ItemMainImageUrl4", filepathname4);
+            command.Parameters.AddWithValue("@ItemMainImageUrl5", filepathname5);
+            command.Parameters.AddWithValue("@ItemMainImageUrl6", filepathname6);
+
             command.Parameters.AddWithValue("@StockInHand", StockInHand);
             command.Parameters.AddWithValue("@VAT", VAT);
+            command.Parameters.AddWithValue("@SearchKeyword", SearchKeyword);
+            command.Parameters.AddWithValue("@MetaDescription", MetaDescription);
+            command.Parameters.AddWithValue("@Active", Active);
+
             con.Open();
             command.ExecuteNonQuery();
             con.Close();
 
             return msg;
         }
-        public string UpdateItemIntoDB(string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId,string VAT)
+        public string UpdateItemIntoDB(string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId,string VAT,string SearchKeyword,string MetaDescription,string Active)
         {
             string msg = "";
+            if (Active == "true") { Active = "1"; } else { Active = "0"; }
+
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand command = new SqlCommand("sp_UpdateItemData", con);
             command.CommandType = CommandType.StoredProcedure;
@@ -70,6 +87,10 @@ namespace TaskAPI.Models
             command.Parameters.AddWithValue("@StockInHand", StockInHand);
             command.Parameters.AddWithValue("@ItemId", ItemId);
             command.Parameters.AddWithValue("@VAT", VAT);
+            command.Parameters.AddWithValue("@SearchKeyword", SearchKeyword);
+            command.Parameters.AddWithValue("@MetaDescription", MetaDescription);
+            command.Parameters.AddWithValue("@Active", Active);
+
             con.Open();
             command.ExecuteNonQuery();
             con.Close();

@@ -33,8 +33,10 @@ namespace TaskAPI.Controllers
                         RowId = Convert.ToString(dr["RowId"]),
                         CategoryId = Convert.ToInt32(dr["CategoryId"]),
                         CategoryName = Convert.ToString(dr["Category Name"]),
-                        SequenceNo = Convert.ToString(dr["SequenceNo"]),
-                        Active = Convert.ToString(dr["Active"])
+                        //SequenceNo = Convert.ToString(dr["SequenceNo"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        MetaDescription= Convert.ToString(dr["MetaDescription"]),
+                        SearchKeyword= Convert.ToString(dr["SearchKeyword"]),
                     });
                 }
             }

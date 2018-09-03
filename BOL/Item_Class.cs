@@ -28,5 +28,10 @@ namespace TaskAPI.BOL
         public string SubCategoryName { get; set; }
         public string StockInHand { get; set; }
 
+        public string Active { get; set; }
+        public string Vat { get; set; }
+        public string SearchKeyword { get; set; }
+        public string MetaDescription { get; set; }
+
     }
 }
