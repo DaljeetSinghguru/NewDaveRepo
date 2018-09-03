@@ -44,3 +44,11 @@ D:\CODE DAVE\sapi\obj\Release\TaskAPI.csproj.CoreCompileInputs.cache
 D:\CODE DAVE\sapi\obj\Release\TaskAPI.csproj.CopyComplete
 D:\CODE DAVE\sapi\obj\Release\TaskAPI.dll
 D:\CODE DAVE\sapi\obj\Release\TaskAPI.pdb
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.dll.config
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.dll
+F:\xxxx\DAPI\NewDaveRepo\bin\TaskAPI.pdb
+F:\xxxx\DAPI\NewDaveRepo\bin\Newtonsoft.Json.dll
+F:\xxxx\DAPI\NewDaveRepo\obj\Release\TaskAPI.csprojResolveAssemblyReference.cache
+F:\xxxx\DAPI\NewDaveRepo\obj\Release\TaskAPI.csproj.CoreCompileInputs.cache
+F:\xxxx\DAPI\NewDaveRepo\obj\Release\TaskAPI.dll
+F:\xxxx\DAPI\NewDaveRepo\obj\Release\TaskAPI.pdb

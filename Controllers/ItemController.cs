@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 using System.Web;
 using TaskAPI.Models;
 using TaskAPI.BOL;
+using System.Web.Script.Serialization;
 
 namespace Slimapi.Controllers
 {
@@ -20,63 +21,49 @@ namespace Slimapi.Controllers
 
         [HttpPost]
 
-        public HttpResponseMessage InsertItemData()
+        public string InsertItemData()
         {
             string[] filename = new string[10];
             string[] filepathname = new string[10];
             int i = 0;
-            HttpResponseMessage result = null;
+            string result = null;
             var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            //if (httpRequest.Files.Count > 0)
+            //{
+            var docfiles = new List<string>();
+           
+            result = "";
+            var ItemName = httpRequest.Form.Get(0);
+            var CategoryId = httpRequest.Form.Get(1);
+            var BrandId = httpRequest.Form.Get(2);
+            var SubCategoryId = httpRequest.Form.Get(3);
+            var Description = httpRequest.Form.Get(4);
+            var ItemStockCode = httpRequest.Form.Get(5);
+            var Price = httpRequest.Form.Get(6);
+            var Title = httpRequest.Form.Get(7);
+            var StockInHand = httpRequest.Form.Get(8);
+            var VAT = httpRequest.Form.Get(9);
+            var SearchKeyword = httpRequest.Form.Get(10);
+            var MetaDescription = httpRequest.Form.Get(11);
+            var Active = httpRequest.Form.Get(12);
+
+            string msg = "";
+
+            msg = new Item_Models().InsertItemIntoDB(
+                //filename[0], filename[1], filename[2], filename[3], filename[4], filename[5], filepathname[0], filepathname[1], filepathname[2],
+                //filepathname[3], filepathname[4], filepathname[5],
+                ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title,
+                StockInHand, VAT, SearchKeyword, MetaDescription, Active);
+
+            if (msg != "")
             {
-                var docfiles = new List<string>();
-                foreach (string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
-
-                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
-                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
-                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
-                    postedFile.SaveAs(filePath);
-
-                    docfiles.Add(filePath);
-                    filename[i] = Convert.ToString(filenameWithHrUserId);
-                    filepathname[i] = Convert.ToString(filePath);
-                    i = i + 1;
-
-                }
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-                var ItemName = httpRequest.Form.Get(0);
-                var CategoryId = httpRequest.Form.Get(1);
-                var BrandId = httpRequest.Form.Get(2);
-                var SubCategoryId = httpRequest.Form.Get(3);
-                var Description = httpRequest.Form.Get(4);
-                var ItemStockCode = httpRequest.Form.Get(5);
-                var Price = httpRequest.Form.Get(6);
-                var Title = httpRequest.Form.Get(7);
-                var StockInHand = httpRequest.Form.Get(8);
-                var VAT = httpRequest.Form.Get(9);
-                var SearchKeyword = httpRequest.Form.Get(10);
-                var MetaDescription = httpRequest.Form.Get(11);
-                var Active = httpRequest.Form.Get(12);
-
-                string msg = "";
-
-                msg = new Item_Models().InsertItemIntoDB(filename[0], filename[1], filename[2], filename[3], filename[4], filename[5], filepathname[0], filepathname[1], filepathname[2],
-                    filepathname[3], filepathname[4], filepathname[5],
-                    ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, 
-                    StockInHand,VAT, SearchKeyword, MetaDescription,Active);
-
-                if (msg != "")
-                {
-                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
-                }
-                //return data;
+                result = "Data Insert";
             }
+            //return data;
+            //}
             else
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = "Data not inserted ";
             }
             return result;
         }
@@ -111,6 +98,7 @@ namespace Slimapi.Controllers
                 {
                     list.Add(new Item_Class()
                     {
+                        RowId = Convert.ToString(dr["RowId"]),
                         ItemId = Convert.ToString(dr["ItemId"]),
                         SubCategoryId = Convert.ToString(dr["SubCategoryId"]),
                         ASIN = Convert.ToString(dr["ASIN"]),
@@ -169,7 +157,7 @@ namespace Slimapi.Controllers
             var Active = httpRequest.Form.Get(13);
             string msg = "";
 
-            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId,VAT, SearchKeyword, MetaDescription,Active);
+            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId, VAT, SearchKeyword, MetaDescription, Active);
 
             if (msg != "")
             {
@@ -318,6 +306,211 @@ namespace Slimapi.Controllers
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             return result;
+        }
+
+
+        [HttpPost]
+
+        public HttpResponseMessage UpdateImageFile4()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var ItemId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Item_Models().UpdateImageFile4IntoDB(filename[0], filepathname[0], ItemId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+
+        [HttpPost]
+
+        public HttpResponseMessage UpdateImageFile5()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var ItemId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Item_Models().UpdateImageFile5IntoDB(filename[0], filepathname[0], ItemId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+
+        [HttpPost]
+
+        public HttpResponseMessage UpdateImageFile6()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var ItemId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Item_Models().UpdateImageFile6IntoDB(filename[0], filepathname[0], ItemId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+        [HttpGet]
+        public IEnumerable<Item_Class> GetAllItemStockCode()
+        {
+
+
+            List<Item_Class> list = new List<Item_Class>();
+            DataTable dt = new DataTable();
+            dt = new Item_Models().GetAllItemStockCode();
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Item_Class()
+                    {
+                        ItemId = Convert.ToString(dr["ItemId"]),
+                        ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
+                    });
+                }
+            }
+            return list;
+        }
+
+        Item_Models objModels = new Item_Models();
+        [HttpPost]
+        public string InsertItemselectedAccessories(string ItemStockCode,string SelectedAccesories)
+        {
+            string Return = "";
+            var selectedAccessoriesArry = SelectedAccesories.Split(':');
+           
+
+            //foreach (var prop in selectedAccessoriesArry1) { }
+            for (int i = 0; i < selectedAccessoriesArry.Length; i++)
+            {
+                Return = objModels.Insert_selectedAccessories(ItemStockCode, selectedAccessoriesArry[i]);
+            }
+            ////foreach (var dr in obj.selectedAccessories)
+            ////{
+            //Return = objModels.Insert_selectedAccessories(obj.ItemStockCode, dr);
+            ////}
+
+            return Return;
+        }
+        [HttpPost]
+        public string InsertItemSelectedRelatedItems(string ItemStockCode, string SelectedRelatedItems)
+        {
+            string Return = "";
+            var selectedAccessoriesArry = SelectedRelatedItems.Split(':');
+            
+            for (int i = 0; i < selectedAccessoriesArry.Length; i++)
+            {
+                Return = objModels.Insert_selectedRelatedItems(ItemStockCode, selectedAccessoriesArry[i]);
+            }
+           
+
+            return Return;
         }
     }
 }
