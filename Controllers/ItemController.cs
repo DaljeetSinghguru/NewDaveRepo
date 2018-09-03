@@ -113,6 +113,7 @@ namespace Slimapi.Controllers
                 {
                     list.Add(new Item_Class()
                     {
+                        RowId = Convert.ToString(dr["RowId"]),
                         ItemId = Convert.ToString(dr["ItemId"]),
                         SubCategoryId = Convert.ToString(dr["SubCategoryId"]),
                         ASIN = Convert.ToString(dr["ASIN"]),
@@ -497,8 +498,8 @@ namespace Slimapi.Controllers
         public string InsertItemselectedAccessories(string ItemStockCode,string SelectedAccesories)
         {
             string Return = "";
-            var selectedAccessoriesArry = SelectedAccesories.Split(',');
-            object selectedAccessoriesArry1 = new JavaScriptSerializer().DeserializeObject(SelectedAccesories);
+            var selectedAccessoriesArry = SelectedAccesories.Split(':');
+           
 
             //foreach (var prop in selectedAccessoriesArry1) { }
             for (int i = 0; i < selectedAccessoriesArry.Length; i++)
@@ -509,6 +510,20 @@ namespace Slimapi.Controllers
             ////{
             //Return = objModels.Insert_selectedAccessories(obj.ItemStockCode, dr);
             ////}
+
+            return Return;
+        }
+        [HttpPost]
+        public string InsertItemSelectedRelatedItems(string ItemStockCode, string SelectedRelatedItems)
+        {
+            string Return = "";
+            var selectedAccessoriesArry = SelectedRelatedItems.Split(':');
+            
+            for (int i = 0; i < selectedAccessoriesArry.Length; i++)
+            {
+                Return = objModels.Insert_selectedRelatedItems(ItemStockCode, selectedAccessoriesArry[i]);
+            }
+           
 
             return Return;
         }

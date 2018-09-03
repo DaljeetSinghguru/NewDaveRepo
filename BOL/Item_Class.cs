@@ -7,6 +7,7 @@ namespace TaskAPI.BOL
     public class Item_Class
     {
         public string ItemId { get; set; }
+        public string RowId { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
         public string SubCategoryId { get; set; }
