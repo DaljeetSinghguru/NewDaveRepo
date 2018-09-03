@@ -27,8 +27,9 @@ namespace TaskAPI.Models
             return msg;
         }
 
-        public string InsertItemIntoDB(string filename1, string filename2, string filename3, string filename4, string filename5, string filename6, string filepathname1, string filepathname2, string filepathname3,
-             string filepathname4, string filepathname5, string filepathname6,
+        public string InsertItemIntoDB(
+            //string filename1, string filename2, string filename3, string filename4, string filename5, string filename6, string filepathname1, string filepathname2, string filepathname3,
+            // string filepathname4, string filepathname5, string filepathname6,
                 string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand,
                 string VAT,string SearchKeyword, string MetaDescription,string Active)
         {
@@ -43,19 +44,19 @@ namespace TaskAPI.Models
             command.Parameters.AddWithValue("@BrandId", BrandId);
             command.Parameters.AddWithValue("@ItemStockCode", ItemStockCode);
             command.Parameters.AddWithValue("@Description", Description);
-            command.Parameters.AddWithValue("@ItemMainImage", filename1);
-            command.Parameters.AddWithValue("@ItemImage1", filename2);
-            command.Parameters.AddWithValue("@ItemImage2", filename3);
-            command.Parameters.AddWithValue("@ItemImage4", filename4);
-            command.Parameters.AddWithValue("@ItemImage5", filename5);
-            command.Parameters.AddWithValue("@ItemImage6", filename6);
+            //command.Parameters.AddWithValue("@ItemMainImage", filename1);
+            //command.Parameters.AddWithValue("@ItemImage1", filename2);
+            //command.Parameters.AddWithValue("@ItemImage2", filename3);
+            //command.Parameters.AddWithValue("@ItemImage4", filename4);
+            //command.Parameters.AddWithValue("@ItemImage5", filename5);
+            //command.Parameters.AddWithValue("@ItemImage6", filename6);
             command.Parameters.AddWithValue("@Price", Price);
-            command.Parameters.AddWithValue("@ItemMainImageUrl", filepathname1);
-            command.Parameters.AddWithValue("@ItemMainImageUrl1", filepathname2);
-            command.Parameters.AddWithValue("@ItemMainImageUrl2", filepathname3);
-            command.Parameters.AddWithValue("@ItemMainImageUrl4", filepathname4);
-            command.Parameters.AddWithValue("@ItemMainImageUrl5", filepathname5);
-            command.Parameters.AddWithValue("@ItemMainImageUrl6", filepathname6);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl", filepathname1);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl1", filepathname2);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl2", filepathname3);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl4", filepathname4);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl5", filepathname5);
+            //command.Parameters.AddWithValue("@ItemMainImageUrl6", filepathname6);
 
             command.Parameters.AddWithValue("@StockInHand", StockInHand);
             command.Parameters.AddWithValue("@VAT", VAT);
@@ -155,6 +156,84 @@ namespace TaskAPI.Models
             con.Close();
             return tb;
 
+        }
+
+        public string UpdateImageFile4IntoDB(string filename4, string filepathname4, string ItemId)
+        {
+            string msg = "";
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_UpdateItemImageData4", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@ItemImage3", filename4);
+            command.Parameters.AddWithValue("@ItemMainImageUrl3", filepathname4);
+            command.Parameters.AddWithValue("@ItemId", ItemId);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            return msg;
+        }
+
+        public string UpdateImageFile5IntoDB(string filename5, string filepathname5, string ItemId)
+        {
+            string msg = "";
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_UpdateItemImageData5", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@ItemImage4", filename5);
+            command.Parameters.AddWithValue("@ItemMainImageUrl4", filepathname5);
+            command.Parameters.AddWithValue("@ItemId", ItemId);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            return msg;
+        }
+
+        public string UpdateImageFile6IntoDB(string filename6, string filepathname6, string ItemId)
+        {
+            string msg = "";
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_UpdateItemImageData6", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@ItemImage5", filename6);
+            command.Parameters.AddWithValue("@ItemMainImageUrl5", filepathname6);
+            command.Parameters.AddWithValue("@ItemId", ItemId);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            return msg;
+        }
+
+        public DataTable GetAllItemStockCode()
+        {
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_GetAllItemStockCode", con);
+            command.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            SqlDataReader dr = command.ExecuteReader();
+            var tb = new DataTable();
+            tb.Load(dr);
+            con.Close();
+            return tb;
+
+        }
+
+        
+        public string Insert_selectedAccessories(string a, string b)
+        {
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand cmd = new SqlCommand("Insert_selectedAccessories", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemStockCode", a);
+            cmd.Parameters.AddWithValue("@ItemStockCodeaccessories", b);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = "Record Insert";
+            return Return;
         }
     }
 }
