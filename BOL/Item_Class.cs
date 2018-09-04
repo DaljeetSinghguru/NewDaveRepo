@@ -11,6 +11,7 @@ namespace TaskAPI.BOL
         public string Title { get; set; }
         public string Name { get; set; }
         public string SubCategoryId { get; set; }
+        public string CategoryId { get; set; }
         public string BrandId { get; set; }
         public string ASIN { get; set; }
         public string SKU { get; set; }
