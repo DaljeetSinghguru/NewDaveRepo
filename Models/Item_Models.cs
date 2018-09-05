@@ -30,7 +30,7 @@ namespace TaskAPI.Models
         public string InsertItemIntoDB(
             //string filename1, string filename2, string filename3, string filename4, string filename5, string filename6, string filepathname1, string filepathname2, string filepathname3,
             // string filepathname4, string filepathname5, string filepathname6,
-                string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand,
+                string ItemName, string BrandId,  string Description, string ItemStockCode, string Price, string Title, string StockInHand,
                 string VAT,string SearchKeyword, string MetaDescription,string Active)
         {
             string msg = "";
@@ -40,7 +40,7 @@ namespace TaskAPI.Models
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@title", Title);
             command.Parameters.AddWithValue("@name", ItemName);
-            command.Parameters.AddWithValue("@SubCategoryId", SubCategoryId);
+            
             command.Parameters.AddWithValue("@BrandId", BrandId);
             command.Parameters.AddWithValue("@ItemStockCode", ItemStockCode);
             command.Parameters.AddWithValue("@Description", Description);
@@ -70,7 +70,7 @@ namespace TaskAPI.Models
 
             return msg;
         }
-        public string UpdateItemIntoDB(string ItemName, string CategoryId, string BrandId, string SubCategoryId, string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId,string VAT,string SearchKeyword,string MetaDescription,string Active)
+        public string UpdateItemIntoDB(string ItemName,  string BrandId,  string Description, string ItemStockCode, string Price, string Title, string StockInHand, string ItemId,string VAT,string SearchKeyword,string MetaDescription,string Active)
         {
             string msg = "";
             if (Active == "true") { Active = "1"; } else { Active = "0"; }
@@ -80,7 +80,7 @@ namespace TaskAPI.Models
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@title", Title);
             command.Parameters.AddWithValue("@name", ItemName);
-            command.Parameters.AddWithValue("@SubCategoryId", SubCategoryId);
+          
             command.Parameters.AddWithValue("@BrandId", BrandId);
             command.Parameters.AddWithValue("@ItemStockCode", ItemStockCode);
             command.Parameters.AddWithValue("@Description", Description);
@@ -247,6 +247,74 @@ namespace TaskAPI.Models
             con.Close();
             string Return = "Record Insert";
             return Return;
+        }
+        public string LinkCategorywithSelectedItem(string a, string b)
+        {
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand cmd = new SqlCommand("UpdateItemwithCategoryId", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemStockCode", a);
+            cmd.Parameters.AddWithValue("@CategoryId", b);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = "Item Link with Selected Category Done.";
+            return Return;
+        }
+
+
+        
+        public string Item_Insert(Item_Class obj)
+        {
+            string msg = "";
+            if (obj.Active == "True") { obj.Active = "1"; } else { obj.Active = "0"; }
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_InsertUpdateItemData", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@title", obj.Title);
+            command.Parameters.AddWithValue("@name", obj.Name);
+            command.Parameters.AddWithValue("@BrandId", obj.BrandId);
+            command.Parameters.AddWithValue("@ItemStockCode", obj.ItemStockCode);
+            command.Parameters.AddWithValue("@Description", obj.Description);
+            command.Parameters.AddWithValue("@Price", obj.Price);
+            command.Parameters.AddWithValue("@StockInHand", obj.StockInHand);
+            command.Parameters.AddWithValue("@VAT", obj.Vat);
+            command.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            command.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
+            command.Parameters.AddWithValue("@Active", obj.Active);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+            return msg;
+        }
+
+        public string Item_Update(Item_Class obj)
+        {
+            string msg = "";
+            if (obj.Active == "True") { obj.Active = "1"; } else { obj.Active = "0"; }
+
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_UpdateItemData", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@title", obj.Title);
+            command.Parameters.AddWithValue("@name", obj.Name);
+
+            command.Parameters.AddWithValue("@BrandId", obj.BrandId);
+            command.Parameters.AddWithValue("@ItemStockCode", obj.ItemStockCode);
+            command.Parameters.AddWithValue("@Description", obj.Description);
+            command.Parameters.AddWithValue("@Price", obj.Price);
+            command.Parameters.AddWithValue("@StockInHand", obj.StockInHand);
+            command.Parameters.AddWithValue("@ItemId", obj.ItemId);
+            command.Parameters.AddWithValue("@VAT", obj.Vat);
+            command.Parameters.AddWithValue("@SearchKeyword", obj.SearchKeyword);
+            command.Parameters.AddWithValue("@MetaDescription", obj.MetaDescription);
+            command.Parameters.AddWithValue("@Active", obj.Active);
+
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            return msg;
         }
     }
 }

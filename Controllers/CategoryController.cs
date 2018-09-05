@@ -57,5 +57,18 @@ namespace TaskAPI.Controllers
             return Return;
         }
 
+        [HttpPost]
+        public string SaveCategory(string name,string ParentId)
+        {
+            string Return = objModels.CategorySave(name, ParentId);
+            return Return;
+        }
+        
+ [HttpPost]
+        public string DeleteCategory(string Id)
+        {
+            string Return = objModels.CategoryDelete(Id);
+            return Return;
+        }
     }
 }

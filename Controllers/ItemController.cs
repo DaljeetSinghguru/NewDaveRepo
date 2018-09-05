@@ -18,55 +18,69 @@ namespace Slimapi.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ItemController : ApiController
     {
+        Item_Models objModels = new Item_Models();
 
         [HttpPost]
-
-        public string InsertItemData()
+        public string InsertItemData(Item_Class obj)
         {
-            string[] filename = new string[10];
-            string[] filepathname = new string[10];
-            int i = 0;
-            string result = null;
-            var httpRequest = HttpContext.Current.Request;
-            //if (httpRequest.Files.Count > 0)
-            //{
-            var docfiles = new List<string>();
-           
-            result = "";
-            var ItemName = httpRequest.Form.Get(0);
-            var CategoryId = httpRequest.Form.Get(1);
-            var BrandId = httpRequest.Form.Get(2);
-            var SubCategoryId = httpRequest.Form.Get(3);
-            var Description = httpRequest.Form.Get(4);
-            var ItemStockCode = httpRequest.Form.Get(5);
-            var Price = httpRequest.Form.Get(6);
-            var Title = httpRequest.Form.Get(7);
-            var StockInHand = httpRequest.Form.Get(8);
-            var VAT = httpRequest.Form.Get(9);
-            var SearchKeyword = httpRequest.Form.Get(10);
-            var MetaDescription = httpRequest.Form.Get(11);
-            var Active = httpRequest.Form.Get(12);
-
-            string msg = "";
-
-            msg = new Item_Models().InsertItemIntoDB(
-                //filename[0], filename[1], filename[2], filename[3], filename[4], filename[5], filepathname[0], filepathname[1], filepathname[2],
-                //filepathname[3], filepathname[4], filepathname[5],
-                ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title,
-                StockInHand, VAT, SearchKeyword, MetaDescription, Active);
-
-            if (msg != "")
-            {
-                result = "Data Insert";
-            }
-            //return data;
-            //}
-            else
-            {
-                result = "Data not inserted ";
-            }
-            return result;
+            string Return = objModels.Item_Insert(obj);
+            return Return;
         }
+
+        [HttpPost]
+        public string UpdateItemData(Item_Class obj)
+        {
+            string Return = objModels.Item_Update(obj);
+            return Return;
+        }
+        //[HttpPost]
+
+        //public string InsertItemData()
+        //{
+        //    string[] filename = new string[10];
+        //    string[] filepathname = new string[10];
+        //    int i = 0;
+        //    string result = null;
+        //    var httpRequest = HttpContext.Current.Request;
+        //    //if (httpRequest.Files.Count > 0)
+        //    //{
+        //    var docfiles = new List<string>();
+
+        //    result = "";
+        //    var ItemName = httpRequest.Form.Get(0);
+        //    //var CategoryId = httpRequest.Form.Get(1);
+        //    var BrandId = httpRequest.Form.Get(1);
+        //    //var SubCategoryId = httpRequest.Form.Get(3);
+        //    var Description = httpRequest.Form.Get(2);
+        //    var ItemStockCode = httpRequest.Form.Get(3);
+        //    var Price = httpRequest.Form.Get(4);
+        //    var Title = httpRequest.Form.Get(5);
+        //    var StockInHand = httpRequest.Form.Get(6);
+        //    var VAT = httpRequest.Form.Get(7);
+        //    var SearchKeyword = httpRequest.Form.Get(8);
+        //    var MetaDescription = httpRequest.Form.Get(9);
+        //    var Active = httpRequest.Form.Get(10);
+
+        //    string msg = "";
+
+        //    msg = new Item_Models().InsertItemIntoDB(
+        //        //filename[0], filename[1], filename[2], filename[3], filename[4], filename[5], filepathname[0], filepathname[1], filepathname[2],
+        //        //filepathname[3], filepathname[4], filepathname[5],
+        //        ItemName,  BrandId,  Description, ItemStockCode, Price, Title,
+        //        StockInHand, VAT, SearchKeyword, MetaDescription, Active);
+
+        //    if (msg != "")
+        //    {
+        //        result = "Data Insert";
+        //    }
+        //    //return data;
+        //    //}
+        //    else
+        //    {
+        //        result = "Data not inserted ";
+        //    }
+        //    return result;
+        //}
 
 
         [HttpGet]
@@ -116,58 +130,58 @@ namespace Slimapi.Controllers
                         Price = Convert.ToString(dr["Price"]),
                         SKU = Convert.ToString(dr["SKU"]),
                         BrandName = Convert.ToString(dr["BrandName"]),
-                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                       // CategoryName = Convert.ToString(dr["CategoryName"]),
                         StockInHand = Convert.ToString(dr["StockInHand"]),
-                        SubCategoryName = Convert.ToString(dr["SubCategoryName"]),
+                       // SubCategoryName = Convert.ToString(dr["SubCategoryName"]),
                         SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
                         Active = Convert.ToString(dr["Active"]),
                         MetaDescription = Convert.ToString(dr["MetaDescription"]),
                         Vat = Convert.ToString(dr["Vat"]),
-                        CategoryId = Convert.ToString(dr["categoryId"]),
+                       // CategoryId = Convert.ToString(dr["categoryId"]),
                     });
                 }
             }
             return list;
         }
-        [HttpPost]
+        //[HttpPost]
 
-        public HttpResponseMessage UpdateItemData()
-        {
-            string[] filename = new string[10];
-            string[] filepathname = new string[10];
+        //public HttpResponseMessage UpdateItemData()
+        //{
+        //    string[] filename = new string[10];
+        //    string[] filepathname = new string[10];
 
-            HttpResponseMessage result = null;
-            var httpRequest = HttpContext.Current.Request;
+        //    HttpResponseMessage result = null;
+        //    var httpRequest = HttpContext.Current.Request;
 
-            var docfiles = new List<string>();
+        //    var docfiles = new List<string>();
 
-            result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-            var ItemName = httpRequest.Form.Get(0);
-            var CategoryId = httpRequest.Form.Get(1);
-            var BrandId = httpRequest.Form.Get(2);
-            var SubCategoryId = httpRequest.Form.Get(3);
-            var Description = httpRequest.Form.Get(4);
-            var ItemStockCode = httpRequest.Form.Get(5);
-            var Price = httpRequest.Form.Get(6);
-            var Title = httpRequest.Form.Get(7);
-            var StockInHand = httpRequest.Form.Get(8);
-            var ItemId = httpRequest.Form.Get(9);
-            var VAT = httpRequest.Form.Get(10);
-            var SearchKeyword = httpRequest.Form.Get(11);
-            var MetaDescription = httpRequest.Form.Get(12);
-            var Active = httpRequest.Form.Get(13);
-            string msg = "";
+        //    result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+        //    var ItemName = httpRequest.Form.Get(0);
+        //   // var CategoryId = httpRequest.Form.Get(1);
+        //    var BrandId = httpRequest.Form.Get(1);
+        //   // var SubCategoryId = httpRequest.Form.Get(3);
+        //    var Description = httpRequest.Form.Get(2);
+        //    var ItemStockCode = httpRequest.Form.Get(3);
+        //    var Price = httpRequest.Form.Get(4);
+        //    var Title = httpRequest.Form.Get(5);
+        //    var StockInHand = httpRequest.Form.Get(6);
+        //    var ItemId = httpRequest.Form.Get(7);
+        //    var VAT = httpRequest.Form.Get(8);
+        //    var SearchKeyword = httpRequest.Form.Get(9);
+        //    var MetaDescription = httpRequest.Form.Get(10);
+        //    var Active = httpRequest.Form.Get(11);
+        //    string msg = "";
 
-            msg = new Item_Models().UpdateItemIntoDB(ItemName, CategoryId, BrandId, SubCategoryId, Description, ItemStockCode, Price, Title, StockInHand, ItemId, VAT, SearchKeyword, MetaDescription, Active);
+        //    msg = new Item_Models().UpdateItemIntoDB(ItemName, BrandId,  Description, ItemStockCode, Price, Title, StockInHand, ItemId, VAT, SearchKeyword, MetaDescription, Active);
 
-            if (msg != "")
-            {
-                result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
-            }
-            //return data;
+        //    if (msg != "")
+        //    {
+        //        result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+        //    }
+        //    //return data;
 
-            return result;
-        }
+        //    return result;
+        //}
         [HttpPost]
 
         public HttpResponseMessage UpdateImageFile1()
@@ -479,7 +493,7 @@ namespace Slimapi.Controllers
             return list;
         }
 
-        Item_Models objModels = new Item_Models();
+       
         [HttpPost]
         public string InsertItemselectedAccessories(string ItemStockCode,string SelectedAccesories)
         {
@@ -513,5 +527,13 @@ namespace Slimapi.Controllers
 
             return Return;
         }
+
+        [HttpPost]
+        public string LinkCategorywithSelectedItem(string ItemStockCode,string CategoryId)
+        {
+            string Return = objModels.LinkCategorywithSelectedItem(ItemStockCode, CategoryId);
+            return Return;
+        }
     }
 }
+
