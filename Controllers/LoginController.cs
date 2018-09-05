@@ -19,7 +19,7 @@ namespace TaskAPI.Controllers
             string Return = "";
             DataTable dt = objModels.check_login(login);
 
-            if (dt.Rows.Count > 0)
+            if ((dt.Rows[0][0]).ToString() != "0")
             {
                 Return = "login successfully";
             }
