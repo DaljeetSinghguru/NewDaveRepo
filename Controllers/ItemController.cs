@@ -123,6 +123,7 @@ namespace Slimapi.Controllers
                         Active = Convert.ToString(dr["Active"]),
                         MetaDescription = Convert.ToString(dr["MetaDescription"]),
                         Vat = Convert.ToString(dr["Vat"]),
+                        CategoryId = Convert.ToString(dr["categoryId"]),
                     });
                 }
             }
