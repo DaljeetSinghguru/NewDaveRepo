@@ -68,14 +68,18 @@ namespace TaskAPI.Models
             return Return;
         }
 
-        public string CategorySave(string name,string ParentId)
+        public string CategorySave(string filename, string filePath,string name,string ParentId,string ActiveOnPortal)
         {
+            if (ActiveOnPortal == "true") { ActiveOnPortal = "1"; } else { ActiveOnPortal = "0"; }
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand cmd = new SqlCommand("Category_SaveTree", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CategoryName", name);
             cmd.Parameters.AddWithValue("@ParentId", ParentId);
+            cmd.Parameters.AddWithValue("@filename", filename);
+            cmd.Parameters.AddWithValue("@filePath", filePath);
+            cmd.Parameters.AddWithValue("@ActiveOnPortal", ActiveOnPortal);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();

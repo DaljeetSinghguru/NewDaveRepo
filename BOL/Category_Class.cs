@@ -11,5 +11,6 @@ namespace TaskAPI.BOL
         public string MetaDescription { get; set; }
         public string Active { get; set; }
         public string RowId { get; set; }
+        public string IsParentId { get; set; }
     }
 }
