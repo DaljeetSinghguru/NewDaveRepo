@@ -32,11 +32,8 @@ namespace TaskAPI.Controllers
                     {
                         RowId = Convert.ToString(dr["RowId"]),
                         CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                        CategoryName = Convert.ToString(dr["Category Name"]),
-                        //SequenceNo = Convert.ToString(dr["SequenceNo"]),
-                        Active = Convert.ToString(dr["Active"]),
-                        MetaDescription= Convert.ToString(dr["MetaDescription"]),
-                        SearchKeyword= Convert.ToString(dr["SearchKeyword"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
                     });
                 }
             }
@@ -57,5 +54,66 @@ namespace TaskAPI.Controllers
             return Return;
         }
 
+        //[HttpPost]
+        //public string SaveCategory(string name,string ParentId)
+        //{
+        //    string Return = objModels.CategorySave(name, ParentId);
+        //    return Return;
+        //}
+        [HttpPost]
+
+        public HttpResponseMessage SaveCategory()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var CategoryName = httpRequest.Form.Get(0);
+                var IsParentMenuId = httpRequest.Form.Get(1);
+                var ActiveOnPortal = httpRequest.Form.Get(2);
+                string msg = "";
+
+                msg = new Category_Models().CategorySave(filename[0], filepathname[0], CategoryName, IsParentMenuId, ActiveOnPortal);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public string DeleteCategory(string Id)
+        {
+            string Return = objModels.CategoryDelete(Id);
+            return Return;
+        }
     }
 }

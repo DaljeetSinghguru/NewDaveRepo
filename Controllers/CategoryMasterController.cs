@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +18,100 @@ namespace SlimApi2.Controllers
 
     public class CategoryMasterController : ApiController
     {
+
+
+        Category_Models objModels = new Category_Models();
+
+        
+        public IEnumerable<MenuItem> GetMenu()
+        {
+
+            List<MenuItem> MenuList = new List<MenuItem>();
+            try
+            {
+                MenuList = BindMenuItem().Select(m => new MenuItem()
+                {
+                    Value = m.Value,
+                    text = m.text,
+                    items = m.items,
+                    ParentMenuId = m.ParentMenuId
+                }).ToList<MenuItem>();
+            }
+            catch { }
+            finally { }
+
+
+            return MenuList;
+        }
+        public IEnumerable<MenuItem> BindMenuItem()
+        {
+            List<MenuItem> MenuList = new List<MenuItem>();
+            try
+            {
+                DataTable Menudt = new DataTable();
+                Menudt = new Category_Models().GetCategorywithSubCategory();
+                
+                //  Menudt = new login().BindMenu(UserId);
+                if (Menudt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < Menudt.Rows.Count; i++)
+                    {
+                        string parentId = Menudt.Rows[i]["IsParentId"].ToString();
+                        if (parentId == "0")
+                        {
+                            MenuList.Add(new MenuItem()
+                            {
+                                Value = Convert.ToString(Menudt.Rows[i]["CategoryId"]),
+                                text = Convert.ToString(Menudt.Rows[i]["CategoryName"]),
+                           
+                                ParentMenuId = Convert.ToString(Menudt.Rows[i]["IsParentId"]),
+                                items = BindChildMenu(Menudt, Convert.ToString(Menudt.Rows[i]["CategoryId"]))
+
+                            });
+                        }
+
+                    }
+
+                }
+                
+            }
+            catch { }
+            finally { }
+            return MenuList;
+        }
+        public IEnumerable<ChildMenuItem> BindChildMenu(DataTable Dt, string ParnetMenuId)
+        {
+            List<ChildMenuItem> MenuList = new List<ChildMenuItem>();
+            DataRow[] Rows = Dt.Select("IsParentId =" + ParnetMenuId);
+            if (Rows.Length == 0) { return MenuList; }
+            for (int i = 0; i < Rows.Length; i++)
+            {
+                MenuList.Add(new ChildMenuItem()
+                {
+                    Value = Convert.ToString(Rows[i]["CategoryId"]),
+                    text = Convert.ToString(Rows[i]["CategoryName"]),
+                    ParentMenuId = Convert.ToString(Rows[i]["IsParentId"]),
+                    items = BindChildMenu(Dt, Convert.ToString(Rows[i]["CategoryId"]))
+
+                });
+               
+
+
+            }
+            return MenuList;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         // GET api/<controller>
         //public IEnumerable<string> Get()
         //{
@@ -24,27 +119,68 @@ namespace SlimApi2.Controllers
         //}
 
         // GET api/<controller>/5
-        //public IEnumerable<CategoryMaterListing> Get()
+
+        //[HttpGet]
+        //public string Get()
         //{
-        //    List<CategoryMaterListing> list = new List<CategoryMaterListing>();
-
-        //    System.Data.DataTable dt = new Category_Models().GetCategory(); //new Login().gettable(" Select distinct w.FromDesignationId, fromdesig.Description as FromDesignationDescription,( isnull(fromuser.FirstName, '') + ' ' + isnull(fromuser.MiddleName, '') + ' ' + isnull(fromuser.LastName, '') ) as FromDesignationUserName, fromuser.HrUserId as FromHrUserId, w.ToDesignationId, todesig.Description as ToDesignationDescription,( isnull(u.FirstName, '') + ' ' + isnull(u.MiddleName, '') + ' ' + isnull(u.LastName, '') ) as ToDesignationUserName , u.HrUserId as ToUserHrUserId from Trn_Com_UserWorkFlow  as w inner join Trn_Hrm_UserRoleCentre as urc on urc.DesignationId = w.ToDesignationId inner join Trn_Hrm_UserRoleCentre as urcfrom on urcfrom.DesignationId = w.FromDesignationId inner join Mst_Hrm_User as u on u.HrUserId = urc.UserId inner join Mst_Hrm_User as fromuser on fromuser.HrUserId = urcfrom.UserId  inner join Mst_Hrm_Designation as todesig on todesig.DesignationId = w.ToDesignationId inner join Mst_Hrm_Designation as fromdesig on fromdesig.DesignationId = w.FromDesignationId where w.Active = 1 and w.WorkFlowId = 3 and   fromuser.HrUserId = " + hrUserId + "  and urcfrom.CentreId=urc.CentreId ");
-
-        //    if (dt.Rows.Count > 0)
+        //    string jsonData = string.Empty;
+        //    try
         //    {
-        //        foreach (System.Data.DataRow dr in dt.Rows)
+        //        List<MenuItem> list = new List<MenuItem>();
+
+        //        System.Data.DataTable dt = new Category_Models().GetCategorywithSubCategory();
+
+        //        List<Menu_Class.ParentMenuField> ParentMenuList = new List<Menu_Class.ParentMenuField>();
+
+        //        if (dt.Rows.Count > 0)
         //        {
-
-        //            list.Add(new CategoryMaterListing()
+        //            for (int i = 0; i < dt.Rows.Count; i++)
         //            {
+        //                string parentId = dt.Rows[i]["IsParentId"].ToString();
+        //                if (parentId == "0")
+        //                {
+        //                    ParentMenuList.Add(new Menu_Class.ParentMenuField()
+        //                    {
+        //                        ParentId = Convert.ToString(dt.Rows[i]["IsParentId"]),
+        //                        Description = Convert.ToString(dt.Rows[i]["CategoryName"]),
+        //                        ChildFields = BindChildMenu(dt, Convert.ToString(dt.Rows[i]["CategoryId"]))
+        //                    });
+        //                }
+        //            }
 
-        //                CategoryName = Convert.ToString(dr["Category Name"]),
-        //                CategoryId = Convert.ToInt32(dr["CategoryId"]),
-        //            });
         //        }
+        //        jsonData = JsonConvert.SerializeObject(ParentMenuList);
         //    }
-        //    return list;
+        //    catch (Exception Ex)
+        //    {
+        //        jsonData = JsonConvert.SerializeObject(Ex.Message);
+        //    }
+
+
+        //    return jsonData;
         //}
+
+
+
+
+        //public IEnumerable<Menu_Class.ChildMenuField> BindChildMenu(DataTable Dt, string ParnetMenuId)
+        //{
+        //    List<Menu_Class.ChildMenuField> MenuList = new List<Menu_Class.ChildMenuField>();
+        //    DataRow[] Rows = Dt.Select("IsParentId =" + ParnetMenuId);
+        //    if (Rows.Length == 0) { return MenuList; }
+        //    for (int i = 0; i < Rows.Length; i++)
+        //    {
+        //        MenuList.Add(new Menu_Class.ChildMenuField()
+        //        {
+        //            ChildId = Convert.ToString(Rows[i]["CategoryId"]),
+        //            Description = Convert.ToString(Rows[i]["CategoryName"]),
+        //            childmenu = BindChildMenu(Dt, Convert.ToString(Rows[i]["CategoryId"]))
+        //        });
+
+        //    }
+        //    return MenuList;
+        //}
+
 
         // POST api/<controller>
         public void Post([FromBody]string value)

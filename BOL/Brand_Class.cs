@@ -11,7 +11,14 @@ namespace TaskAPI.BOL
         public string SequenceNo { get; set; }
         public string SearchKeyword { get; set; }
         public string MetaDescription { get; set; }
+        public string filename { get; set; }
         public string Active { get; set; }
         public string RowId { get; set; }
+        public string Active1 { get; set; }
+        public string MetaDescription1 { get; set; }
+
+        public string Name { get; set; }
+
+        public string SearchKeyword1 { get; set; }
     }
 }

@@ -63,19 +63,21 @@ namespace TaskAPI.Models
 
         public string Brand_Update(Brand_Class obj)
         {
+            if (obj.Active1 == "True") { obj.Active1 = "1"; } else { obj.Active1 = "0"; }
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             SqlCommand cmd = new SqlCommand("Brand_Update", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@BrandId", obj.BrandId);
-            cmd.Parameters.AddWithValue("@BrandName", obj.BrandName);
-            cmd.Parameters.AddWithValue("@SequenceNo", obj.SequenceNo);
-            cmd.Parameters.AddWithValue("@Active", obj.Active);
-            cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 50).Value = "";
-            cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
+            cmd.Parameters.AddWithValue("@BrandName", obj.Name);
+            cmd.Parameters.Add("@MetaDescription", SqlDbType.VarChar).Value = obj.MetaDescription1;
+            cmd.Parameters.Add("@SearchKeyword", SqlDbType.VarChar).Value = obj.SearchKeyword1;
+            cmd.Parameters.AddWithValue("@Active", obj.Active1);
+            
+       
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
-            string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
+            string Return = "Update";
             return Return;
         }
         public string InsertBrandIntoDB(string filename, string ImageUrl, string Brand, string SearchKeyword,string MetaDescription,string Active)
@@ -99,5 +101,22 @@ namespace TaskAPI.Models
 
             return msg;
         }
+
+        public string UpdateBrandFileIntoDB(string filename6, string filepathname6, string BrandId)
+        {
+            string msg = "";
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand command = new SqlCommand("sp_UpdateBrandImageData", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@ItemImage", filename6);
+            command.Parameters.AddWithValue("@ItemMainImageUrl", filepathname6);
+            command.Parameters.AddWithValue("@BrandId", BrandId);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            return msg;
+        }
+
     }
 }

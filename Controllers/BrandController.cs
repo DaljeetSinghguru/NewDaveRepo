@@ -35,6 +35,7 @@ namespace TaskAPI.Controllers
                         BrandName = Convert.ToString(dr["BrandName"]),
                         MetaDescription = Convert.ToString(dr["MetaDescription"]),
                         SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        filename = Convert.ToString(dr["filename"]),
                         SequenceNo = Convert.ToString(dr["SequenceNo"]),
                         Active = Convert.ToString(dr["Active"])
                     });
@@ -104,6 +105,55 @@ namespace TaskAPI.Controllers
                 string msg = "";
 
                 msg = new Brand_Models().InsertBrandIntoDB(filename[0], filepathname[0], BrandName, SearchKeyword, MetaDescription, Active);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+
+        [HttpPost]
+
+        public HttpResponseMessage UpdateBrandFileData()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var BrandId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Brand_Models().UpdateBrandFileIntoDB(filename[0], filepathname[0], BrandId);
 
                 if (msg != "")
                 {
