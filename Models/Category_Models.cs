@@ -120,5 +120,27 @@ namespace TaskAPI.Models
             con.Close();
             return dt;
         }
+
+        public DataTable Category_Get()
+        {
+            
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("getCategoryforFirstPage", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+           
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
     }
 }
