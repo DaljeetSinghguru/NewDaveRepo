@@ -115,5 +115,31 @@ namespace TaskAPI.Controllers
             string Return = objModels.CategoryDelete(Id);
             return Return;
         }
+
+
+        [HttpGet]
+        public IEnumerable<Category_Class> Category_Get()
+        {
+            List<Category_Class> list = new List<Category_Class>();
+            DataTable dt = objModels.Category_Get();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Category_Class()
+                    {
+                        CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
+                        filename = Convert.ToString(dr["filename"]),
+                        filePath = Convert.ToString(dr["filePath"]),
+                        ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
+                        ParentName = Convert.ToString(dr["ParentName"]),
+                    });
+                }
+            }
+            return list;
+        }
+
     }
 }
