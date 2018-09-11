@@ -141,5 +141,45 @@ namespace TaskAPI.Controllers
             return list;
         }
 
+        [HttpGet]
+        public IEnumerable<Item_Class> GetItemByCategoryId(string CategoryId)
+        {
+            List<Item_Class> list = new List<Item_Class>();
+            DataTable dt = objModels.GetItemByCategoryId(CategoryId);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Item_Class()
+                    {
+                        CategoryId = Convert.ToString(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        ASIN = Convert.ToString(dr["ASIN"]),
+                        BrandId = Convert.ToString(dr["BrandId"]),
+                        BrandName = Convert.ToString(dr["BrandName"]),
+                        Description = Convert.ToString(dr["Description"]),
+                        ItemId = Convert.ToString(dr["ItemId"]),
+                        ItemImage1 = Convert.ToString(dr["ItemImage1"]),
+                        ItemImage2 = Convert.ToString(dr["ItemImage2"]),
+                        ItemMainImage = Convert.ToString(dr["ItemMainImage"]),
+                        ItemMainImageUrl = Convert.ToString(dr["ItemMainImageUrl"]),
+                        ItemMainImageUrl1 = Convert.ToString(dr["ItemMainImageUrl1"]),
+                        ItemMainImageUrl2 = Convert.ToString(dr["ItemMainImageUrl2"]),
+                        ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        Price = Convert.ToString(dr["Price"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        SKU = Convert.ToString(dr["SKU"]),
+                        StockInHand = Convert.ToString(dr["StockInHand"]),
+                        Title = Convert.ToString(dr["Title"]),
+                        Vat = Convert.ToString(dr["Vat"]),
+                    });
+                }
+            }
+            return list;
+        }
+
     }
 }
