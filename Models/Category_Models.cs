@@ -148,7 +148,7 @@ namespace TaskAPI.Models
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
             con.Open();
-            SqlCommand cmd = new SqlCommand("sp_getItemByCategoryId", con);
+            SqlCommand cmd = new SqlCommand("sp_GetItemByCategoryId", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CategoryId", CategoryId);
 
