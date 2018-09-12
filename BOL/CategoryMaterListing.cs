@@ -52,7 +52,10 @@ namespace TaskAPI.BOL
     {
         public string Value { get; set; }
         public string text { get; set; }
-
+        public string filename { get; set; }
+        public string filePath { get; set; }
+        public string ActiveOnPortal { get; set; }
+        public string Description { get; set; }
         public string ParentMenuId { get; set; }
         public IEnumerable<ChildMenuItem> items = null;
     }
@@ -61,7 +64,10 @@ namespace TaskAPI.BOL
     {
         public string Value { get; set; }
         public string text { get; set; }
-
+        public string filename { get; set; }
+        public string filePath { get; set; }
+        public string Description { get; set; }
+        public string ActiveOnPortal { get; set; }
         public string ParentMenuId { get; set; }
         public IEnumerable<ChildMenuItem> items = null;
 

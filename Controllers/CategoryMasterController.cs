@@ -33,6 +33,10 @@ namespace SlimApi2.Controllers
                 {
                     Value = m.Value,
                     text = m.text,
+                    ActiveOnPortal=m.ActiveOnPortal,
+                    filePath=m.filePath,
+                    Description=m.Description,
+                    filename=m.filename,
                     items = m.items,
                     ParentMenuId = m.ParentMenuId
                 }).ToList<MenuItem>();
@@ -63,8 +67,11 @@ namespace SlimApi2.Controllers
                             {
                                 Value = Convert.ToString(Menudt.Rows[i]["CategoryId"]),
                                 text = Convert.ToString(Menudt.Rows[i]["CategoryName"]),
-                           
                                 ParentMenuId = Convert.ToString(Menudt.Rows[i]["IsParentId"]),
+                                filename = Convert.ToString(Menudt.Rows[i]["filename"]),
+                                Description = Convert.ToString(Menudt.Rows[i]["Description"]),
+                                filePath = Convert.ToString(Menudt.Rows[i]["filePath"]),
+                                ActiveOnPortal = Convert.ToString(Menudt.Rows[i]["ActiveOnPortal"]),
                                 items = BindChildMenu(Menudt, Convert.ToString(Menudt.Rows[i]["CategoryId"]))
 
                             });
@@ -90,6 +97,10 @@ namespace SlimApi2.Controllers
                 {
                     Value = Convert.ToString(Rows[i]["CategoryId"]),
                     text = Convert.ToString(Rows[i]["CategoryName"]),
+                    filename = Convert.ToString(Rows[i]["filename"]),
+                    filePath = Convert.ToString(Rows[i]["filePath"]),
+                    Description = Convert.ToString(Rows[i]["Description"]),
+                    ActiveOnPortal = Convert.ToString(Rows[i]["ActiveOnPortal"]),
                     ParentMenuId = Convert.ToString(Rows[i]["IsParentId"]),
                     items = BindChildMenu(Dt, Convert.ToString(Rows[i]["CategoryId"]))
 
