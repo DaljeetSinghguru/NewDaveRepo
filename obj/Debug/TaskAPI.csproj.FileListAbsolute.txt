@@ -543,3 +543,4 @@ F:\xxxx\DAPI\NewDaveRepo\bin\Braintree.dll
 F:\xxxx\DAPI\NewDaveRepo\bin\Newtonsoft.Json.dll
 F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.dll
 F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.pdb
+F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.csprojResolveAssemblyReference.cache
