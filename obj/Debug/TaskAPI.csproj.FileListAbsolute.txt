@@ -544,3 +544,13 @@ F:\xxxx\DAPI\NewDaveRepo\bin\Newtonsoft.Json.dll
 F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.dll
 F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.pdb
 F:\xxxx\DAPI\NewDaveRepo\obj\Debug\TaskAPI.csprojResolveAssemblyReference.cache
+D:\21092018\NewDaveRepo\bin\TaskAPI.dll.config
+D:\21092018\NewDaveRepo\bin\TaskAPI.dll
+D:\21092018\NewDaveRepo\bin\TaskAPI.pdb
+D:\21092018\NewDaveRepo\bin\Braintree.dll
+D:\21092018\NewDaveRepo\bin\Newtonsoft.Json.dll
+D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csprojAssemblyReference.cache
+D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csproj.CoreCompileInputs.cache
+D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csproj.CopyComplete
+D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.dll
+D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.pdb
