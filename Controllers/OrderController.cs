@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using TaskAPI.BOL;
@@ -12,22 +13,29 @@ namespace TaskAPI.Controllers
     public class OrderController : ApiController
     {
         Customer_Models objModels = new Customer_Models();
+        Connection objCon = new Connection();
 
         [HttpPost]
-        public bool ShipmentHistory(ShipmentModel data)
+        public bool ShipmentHistory(Shipping_Class data)
         {
+
+                //Logincredentialpassword
+                //Logincredentialusername
+
+
+
             IEnumerable<ItemsArray> items = data.ItemsArray;
             foreach (var item in items)
             {
                 // item.name;
                 SqlCommand cmd = new SqlCommand();
-                SqlConnection cn = new SqlConnection(new Login().GetConnectionString());
+                SqlConnection cn = new SqlConnection(objCon.ConnectionReturn());
                 try
                 {
 
 
-                    new Login().UpdateShipmentHistory(data.TransectionId, data.HrUserId, data.AccountPost, item.name, item.price, item.quantity, data.Date, data.FirstName,
-                       data.LastName, data.BillingAddress, data.ShippingAddress, data.ContactNumber, data.EmailAddress, data.FromDate, data.totalPrice, data.CouponNumber, data.Active, item.ItemType, item.ItemId);
+                    new Shipping_Models().UpdateShipmentHistory(data.TransectionId, data.CustId,  item.name, item.price, item.quantity, data.Date,  data.EmailAddress,  data.totalPrice,  
+                        item.ItemType, item.ItemId,item.sku);
 
 
 

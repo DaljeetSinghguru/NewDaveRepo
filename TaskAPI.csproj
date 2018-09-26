@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BOL\Accessries_Class.cs" />
+    <Compile Include="BOL\Shipping_Class.cs" />
     <Compile Include="BOL\Customer_Class.cs" />
     <Compile Include="BOL\CategoryMaterListing.cs" />
     <Compile Include="BOL\HelpSupportModel.cs" />
@@ -168,6 +169,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer_Models.cs" />
+    <Compile Include="Models\Shipping_Models.cs" />
     <Compile Include="Models\MailSent.cs" />
     <Compile Include="Models\PaymentReqestModel.cs" />
     <Compile Include="Models\Login_Models.cs" />

@@ -33,7 +33,7 @@ namespace TaskAPI.Models
             con.Close();
             return dt;
         }
-        public DataTable check_logincustomer(Userlogin_Class obj)
+        public string check_logincustomer(Userlogin_Class obj)
         {
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
@@ -42,18 +42,14 @@ namespace TaskAPI.Models
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Name", obj.Name);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
-
-            try
-            {
-                dt.Load(cmd.ExecuteReader());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            cmd.Dispose();
+            cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 50).Value = "";
+            cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
+            
+            cmd.ExecuteNonQuery();
             con.Close();
-            return dt;
+            string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
+            return Return;
+            
         }
         public string loginfirst_Insert(login_Class obj)
         {
@@ -110,6 +106,29 @@ namespace TaskAPI.Models
             con.Close();
             string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
             return Return;
+        }
+
+
+        public DataTable Customer_Find(string Id)
+        {
+           
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Customer_Find", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", Id);
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
         }
     }
 }
