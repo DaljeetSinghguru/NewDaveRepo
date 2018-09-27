@@ -50,5 +50,22 @@ namespace TaskAPI.Models
             }
         }
 
+        public string GetOrderNUmber(string TransectionId)
+        {
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetOrderNumber", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@TransectionId", TransectionId);
+
+            cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 50).Value = "";
+            cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
+            return Return;
+        }
+
     }
 }

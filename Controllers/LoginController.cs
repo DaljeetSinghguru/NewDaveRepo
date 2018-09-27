@@ -32,12 +32,12 @@ namespace TaskAPI.Controllers
 
 
         [HttpPost]
-        public string checkLogincustomer(Userlogin_Class login)
+        public Userlogin checkLogincustomer(Userlogin_Class login)
         {
-            
-            string userId = objModels.check_logincustomer(login);
+            Userlogin Userlogin1 = new Userlogin();
+            Userlogin1= objModels.check_logincustomer(login);
 
-            return userId;
+            return Userlogin1;
         }
 
 
@@ -49,10 +49,11 @@ namespace TaskAPI.Controllers
         }
 
         [HttpPost]
-        public string Loginsecond_Update(login_Class obj)
+        public Userlogin Loginsecond_Update(login_Class obj)
         {
-            string Return = objModels.loginSecond_Update(obj);
-            return Return;
+            Userlogin Userlogin1 = new Userlogin();
+            Userlogin1 = objModels.loginSecond_Update(obj);
+            return Userlogin1;
         }
 
 

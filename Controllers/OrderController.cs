@@ -16,7 +16,7 @@ namespace TaskAPI.Controllers
         Connection objCon = new Connection();
 
         [HttpPost]
-        public bool ShipmentHistory(Shipping_Class data)
+        public string ShipmentHistory(Shipping_Class data)
         {
 
                 //Logincredentialpassword
@@ -55,29 +55,10 @@ namespace TaskAPI.Controllers
 
                 }
             }
+          string aa=    new Shipping_Models().GetOrderNUmber(data.TransectionId);
 
-
-            //Insert INTO Trn_Shop_ShipHistory values (@HrUserId,'6',@Date)
-            //SqlCommand cmd1 = new SqlCommand();
-            //SqlConnection cn1 = new SqlConnection(new Login().GetConnectionString());
-            //try
-            //{
-            //    new Login().InsertTrn_Shop_ShipHistory(data.HrUserId,data.Date);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-            //finally
-            //{
-            //    if (cn1.State == ConnectionState.Open)
-            //    {
-            //        cn1.Close();
-            //    }
-            //    cmd1.Dispose();
-            //    cn1.Dispose();
-            //}
-            return true;
+           
+            return aa;
 
         }
 

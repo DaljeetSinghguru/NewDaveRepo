@@ -33,7 +33,7 @@ namespace TaskAPI.Models
             con.Close();
             return dt;
         }
-        public string check_logincustomer(Userlogin_Class obj)
+        public Userlogin check_logincustomer(Userlogin_Class obj)
         {
             DataTable dt = new DataTable();
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
@@ -43,12 +43,15 @@ namespace TaskAPI.Models
             cmd.Parameters.AddWithValue("@Name", obj.Name);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
             cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 50).Value = "";
+            cmd.Parameters.Add("@ReturnName", SqlDbType.NVarChar, 50).Value = "";
             cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
-            
+            cmd.Parameters["@Returnname"].Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
             con.Close();
-            string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
-            return Return;
+            Userlogin Userlogin = new Userlogin();
+           Userlogin.Id = Convert.ToString(cmd.Parameters["@Return"].Value);
+            Userlogin.Name = Convert.ToString(cmd.Parameters["@Returnname"].Value);
+            return Userlogin;
             
         }
         public string loginfirst_Insert(login_Class obj)
@@ -69,7 +72,7 @@ namespace TaskAPI.Models
             string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
             return Return;
         }
-        public string loginSecond_Update(login_Class obj)
+        public Userlogin  loginSecond_Update(login_Class obj)
         {
             if (obj.wantnews == "True")
             {
@@ -97,15 +100,19 @@ namespace TaskAPI.Models
             cmd.Parameters.AddWithValue("@InvoiceAddressLine3", obj.InvoiceAddressLine3);
             cmd.Parameters.AddWithValue("@InvoiceAddressLine4", obj.InvoiceAddressLine4);
             cmd.Parameters.AddWithValue("@wantnews", obj.wantnews );
-
-            
             cmd.Parameters.Add("@Return", SqlDbType.NVarChar, 50).Value = "";
+            cmd.Parameters.Add("@ReturnName", SqlDbType.NVarChar, 50).Value = "";
             cmd.Parameters["@Return"].Direction = ParameterDirection.Output;
+
+           
+            cmd.Parameters["@ReturnName"].Direction = ParameterDirection.Output;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
-            string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
-            return Return;
+            Userlogin Userlogin = new Userlogin();
+            Userlogin.Id = Convert.ToString(cmd.Parameters["@Return"].Value);
+            Userlogin.Name = Convert.ToString(cmd.Parameters["@Returnname"].Value);
+            return Userlogin;
         }
 
 

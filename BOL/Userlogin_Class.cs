@@ -10,4 +10,9 @@ namespace TaskAPI.BOL
         public string Name { get; set; }
         public string Password { get; set; }
     }
+    public class Userlogin
+    {
+        public string Name { get; set; }
+        public string Id { get; set; }
+    }
 }
