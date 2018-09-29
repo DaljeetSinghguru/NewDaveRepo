@@ -37,7 +37,7 @@ namespace TaskAPI.Controllers
                     new Shipping_Models().UpdateShipmentHistory(data.TransectionId, data.CustId,  item.name, item.price, item.quantity, data.Date,  data.EmailAddress,  data.totalPrice,  
                         item.ItemType, item.ItemId,item.sku);
 
-
+                    cn.Close();
 
                 }
                 catch (Exception ex)
