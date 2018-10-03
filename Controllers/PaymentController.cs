@@ -20,7 +20,7 @@ namespace SlimApi2.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
 
-    public class PaymentController : ApiController
+    public class PaymentController : Controller
     {
         public IBraintreeConfiguration config = new BraintreeConfigurationController();
        
