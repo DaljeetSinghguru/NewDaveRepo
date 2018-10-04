@@ -2,14 +2,14 @@
 using System;
 using System.Configuration;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Web;
 using System.Xml;
-using SlimApi2.App_Code;
+//using SlimApi2.App_Code;
 
-namespace SlimApi2.Controllers
+namespace BraintreeASPExample
 {
-    public class BraintreeConfigurationController : IBraintreeConfiguration
+    public class BraintreeConfiguration : IBraintreeConfiguration
     {
         public string Environment { get; set; }
         public string MerchantId { get; set; }
@@ -49,6 +49,5 @@ namespace SlimApi2.Controllers
 
             return BraintreeGateway;
         }
-
     }
 }

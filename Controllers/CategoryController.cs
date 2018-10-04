@@ -161,10 +161,18 @@ namespace TaskAPI.Controllers
                         Description = Convert.ToString(dr["Description"]),
                         ItemId = Convert.ToString(dr["ItemId"]),
                         ItemImage1 = Convert.ToString(dr["ItemImage1"]),
+                        ItemImage3 = Convert.ToString(dr["ItemImage3"]),
+                        ItemImage4 = Convert.ToString(dr["ItemImage4"]),
+                        ItemImage5 = Convert.ToString(dr["ItemImage5"]),
+
                         ItemImage2 = Convert.ToString(dr["ItemImage2"]),
                         ItemMainImage = Convert.ToString(dr["ItemMainImage"]),
                         ItemMainImageUrl = Convert.ToString(dr["ItemMainImageUrl"]),
                         ItemMainImageUrl1 = Convert.ToString(dr["ItemMainImageUrl1"]),
+                        ItemMainImageUrl3 = Convert.ToString(dr["ItemMainImageUrl3"]),
+                        ItemMainImageUrl4 = Convert.ToString(dr["ItemMainImageUrl4"]),
+                        ItemMainImageUrl5 = Convert.ToString(dr["ItemMainImageUrl5"]),
+
                         ItemMainImageUrl2 = Convert.ToString(dr["ItemMainImageUrl2"]),
                         ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
                         MetaDescription = Convert.ToString(dr["MetaDescription"]),

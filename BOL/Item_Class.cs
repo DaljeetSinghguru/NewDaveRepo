@@ -19,11 +19,18 @@ namespace TaskAPI.BOL
         public string Description { get; set; }
         public string ItemMainImage { get; set; }
         public string ItemImage1 { get; set; }
+        public string ItemImage3 { get; set; }
+        public string ItemImage4 { get; set; }
+        public string ItemImage5 { get; set; }
+
         public string ItemImage2 { get; set; }
         public string Price { get; set; }
         public string ItemMainImageUrl { get; set; }
 
         public string ItemMainImageUrl1 { get; set; }
+        public string ItemMainImageUrl3 { get; set; }
+        public string ItemMainImageUrl4 { get; set; }
+        public string ItemMainImageUrl5 { get; set; }
         public string ItemMainImageUrl2 { get; set; }
         public string BrandName { get; set; }
         public string CategoryName { get; set; }
