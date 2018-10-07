@@ -156,6 +156,7 @@
     <Compile Include="BOL\SubCategory_Class.cs" />
     <Compile Include="BOL\Userlogin_Class.cs" />
     <Compile Include="Controllers\BraintreeConfigurationController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\IBraintreeConfiguration.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
