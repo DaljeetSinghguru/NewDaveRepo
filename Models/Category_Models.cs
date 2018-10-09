@@ -86,6 +86,24 @@ namespace TaskAPI.Models
             string Return = "Record Insert";
             return Return;
         }
+        public string CategorySaveUpdate(string filename, string filePath, string name, string ParentId, string ActiveOnPortal)
+        {
+            if (ActiveOnPortal == "true") { ActiveOnPortal = "1"; } else { ActiveOnPortal = "0"; }
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand cmd = new SqlCommand("Category_UpdateTree", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@CategoryName", name);
+            cmd.Parameters.AddWithValue("@ParentId", ParentId);
+            cmd.Parameters.AddWithValue("@filename", filename);
+            cmd.Parameters.AddWithValue("@filePath", filePath);
+            cmd.Parameters.AddWithValue("@ActiveOnPortal", ActiveOnPortal);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = "Record Insert";
+            return Return;
+        }
         public string CategoryDelete(string Id)
         {
             DataTable dt = new DataTable();
@@ -175,6 +193,51 @@ namespace TaskAPI.Models
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@CategoryId", CategoryId);
 
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
+
+        public DataTable GetHotSaleItem()
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetHotSaleItem", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
+
+        public DataTable GetRelatedItemByCategory(string ItemStockCode, string categoryid)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetRelatedItemByItemStockCode", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemStockcode", ItemStockCode);
+            cmd.Parameters.AddWithValue("@categoryid", categoryid);
             try
             {
                 dt.Load(cmd.ExecuteReader());

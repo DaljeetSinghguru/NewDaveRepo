@@ -110,6 +110,54 @@ namespace TaskAPI.Controllers
         }
 
         [HttpPost]
+
+        public HttpResponseMessage SaveUpdateCategory()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var CategoryName = httpRequest.Form.Get(0);
+                var IsParentMenuId = httpRequest.Form.Get(1);
+                var ActiveOnPortal = httpRequest.Form.Get(2);
+                string msg = "";
+
+                msg = new Category_Models().CategorySaveUpdate(filename[0], filepathname[0], CategoryName, IsParentMenuId, ActiveOnPortal);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+        [HttpPost]
         public string DeleteCategory(string Id)
         {
             string Return = objModels.CategoryDelete(Id);
@@ -190,10 +238,90 @@ namespace TaskAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Item_Class> GetItemByCategory(string CategoryId)
+        public IEnumerable<Item_Class> GetItemByCategory(String CategoryId)
         {
             List<Item_Class> list = new List<Item_Class>();
             DataTable dt = objModels.GetItemByCategory(CategoryId);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Item_Class()
+                    {
+                        CategoryId = Convert.ToString(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        ASIN = Convert.ToString(dr["ASIN"]),
+                        BrandId = Convert.ToString(dr["BrandId"]),
+                        BrandName = Convert.ToString(dr["BrandName"]),
+                        Description = Convert.ToString(dr["Description"]),
+                        ItemId = Convert.ToString(dr["ItemId"]),
+                        ItemImage1 = Convert.ToString(dr["ItemImage1"]),
+                        ItemImage2 = Convert.ToString(dr["ItemImage2"]),
+                        ItemMainImage = Convert.ToString(dr["ItemMainImage"]),
+                        ItemMainImageUrl = Convert.ToString(dr["ItemMainImageUrl"]),
+                        ItemMainImageUrl1 = Convert.ToString(dr["ItemMainImageUrl1"]),
+                        ItemMainImageUrl2 = Convert.ToString(dr["ItemMainImageUrl2"]),
+                        ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        Price = Convert.ToString(dr["Price"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        SKU = Convert.ToString(dr["SKU"]),
+                        StockInHand = Convert.ToString(dr["StockInHand"]),
+                        Title = Convert.ToString(dr["Title"]),
+                        Vat = Convert.ToString(dr["Vat"]),
+                    });
+                }
+            }
+            return list;
+        }
+
+        [HttpGet]
+        public IEnumerable<Item_Class> GetRelatedItems(string ItemStockCode, string categoryid)
+        {
+            List<Item_Class> list = new List<Item_Class>();
+            DataTable dt = objModels.GetRelatedItemByCategory(ItemStockCode, categoryid);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Item_Class()
+                    {
+                        CategoryId = Convert.ToString(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        ASIN = Convert.ToString(dr["ASIN"]),
+                        BrandId = Convert.ToString(dr["BrandId"]),
+                        BrandName = Convert.ToString(dr["BrandName"]),
+                        Description = Convert.ToString(dr["Description"]),
+                        ItemId = Convert.ToString(dr["ItemId"]),
+                        ItemImage1 = Convert.ToString(dr["ItemImage1"]),
+                        ItemImage2 = Convert.ToString(dr["ItemImage2"]),
+                        ItemMainImage = Convert.ToString(dr["ItemMainImage"]),
+                        ItemMainImageUrl = Convert.ToString(dr["ItemMainImageUrl"]),
+                        ItemMainImageUrl1 = Convert.ToString(dr["ItemMainImageUrl1"]),
+                        ItemMainImageUrl2 = Convert.ToString(dr["ItemMainImageUrl2"]),
+                        ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        Price = Convert.ToString(dr["Price"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        SKU = Convert.ToString(dr["SKU"]),
+                        StockInHand = Convert.ToString(dr["StockInHand"]),
+                        Title = Convert.ToString(dr["Title"]),
+                        Vat = Convert.ToString(dr["Vat"]),
+                    });
+                }
+            }
+            return list;
+        }
+
+        [HttpGet]
+        public IEnumerable<Item_Class> GetHotSaleItem()
+        {
+            List<Item_Class> list = new List<Item_Class>();
+            DataTable dt = objModels.GetHotSaleItem();
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)

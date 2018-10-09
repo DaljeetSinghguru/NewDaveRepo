@@ -70,3 +70,4 @@ D:\21092018\NewDaveRepo\obj\Release\TaskAPI.csproj.CoreCompileInputs.cache
 D:\21092018\NewDaveRepo\obj\Release\TaskAPI.csproj.CopyComplete
 D:\21092018\NewDaveRepo\obj\Release\TaskAPI.dll
 D:\21092018\NewDaveRepo\obj\Release\TaskAPI.pdb
+D:\21092018\NewDaveRepo\obj\Release\TaskAPI.csprojAssemblyReference.cache
