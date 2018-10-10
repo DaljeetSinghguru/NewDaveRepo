@@ -118,5 +118,28 @@ namespace TaskAPI.Models
             return msg;
         }
 
+        public DataTable GetBrand()
+        {
+            
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetBrand", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+           
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
+
+
     }
 }

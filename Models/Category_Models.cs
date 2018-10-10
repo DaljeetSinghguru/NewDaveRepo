@@ -86,7 +86,7 @@ namespace TaskAPI.Models
             string Return = "Record Insert";
             return Return;
         }
-        public string CategorySaveUpdate(string filename, string filePath, string name, string ParentId, string ActiveOnPortal)
+        public string CategorySaveUpdate(string filename, string filePath, string Bannerfilename, string bannerfilePath, string name, string ParentId, string ActiveOnPortal)
         {
             if (ActiveOnPortal == "true") { ActiveOnPortal = "1"; } else { ActiveOnPortal = "0"; }
             DataTable dt = new DataTable();
@@ -97,6 +97,8 @@ namespace TaskAPI.Models
             cmd.Parameters.AddWithValue("@ParentId", ParentId);
             cmd.Parameters.AddWithValue("@filename", filename);
             cmd.Parameters.AddWithValue("@filePath", filePath);
+            cmd.Parameters.AddWithValue("@BannerImage", Bannerfilename);
+            cmd.Parameters.AddWithValue("@BannnerfilePath", bannerfilePath);
             cmd.Parameters.AddWithValue("@ActiveOnPortal", ActiveOnPortal);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -237,7 +239,7 @@ namespace TaskAPI.Models
             SqlCommand cmd = new SqlCommand("GetRelatedItemByItemStockCode", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@ItemStockcode", ItemStockCode);
-            cmd.Parameters.AddWithValue("@categoryid", categoryid);
+            //cmd.Parameters.AddWithValue("@categoryid", categoryid);
             try
             {
                 dt.Load(cmd.ExecuteReader());
@@ -260,6 +262,28 @@ namespace TaskAPI.Models
             SqlCommand cmd = new SqlCommand("sp_GetItemBysearchtext", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Searchtext", text);
+
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
+        public DataTable GetItemByBrandId(string BrandId)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetitembyBrandId", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@BrandId", BrandId);
 
             try
             {

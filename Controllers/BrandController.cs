@@ -168,5 +168,29 @@ namespace TaskAPI.Controllers
             return result;
         }
 
+
+
+        [HttpGet]
+        public IEnumerable<Brand_Class> GetBrand()
+        {
+            List<Brand_Class> list = new List<Brand_Class>();
+
+            DataTable dt = objModels.GetBrand();
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Brand_Class()
+                    {
+                        BrandId = Convert.ToString(dr["BrandId"]),
+                        BrandName = Convert.ToString(dr["BrandName"]),
+                        filename = Convert.ToString(dr["filename"])
+                    });
+                }
+            }
+            return list;
+        }
+
     }
 }
