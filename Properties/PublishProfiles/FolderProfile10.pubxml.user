@@ -70,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2018 21:00:04</publishTime>
     </File>
     <File Include="bin/TaskAPI.dll">
-      <publishTime>10/09/2018 17:39:48</publishTime>
+      <publishTime>10/11/2018 12:18:47</publishTime>
     </File>
     <File Include="bin/TaskAPI.pdb">
-      <publishTime>10/09/2018 17:39:48</publishTime>
+      <publishTime>10/11/2018 12:18:47</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>09/21/2018 21:00:04</publishTime>

@@ -86,7 +86,7 @@ namespace TaskAPI.Models
             string Return = "Record Insert";
             return Return;
         }
-        public string CategorySaveUpdate(string filename, string filePath, string Bannerfilename, string bannerfilePath, string name, string ParentId, string ActiveOnPortal)
+        public string CategorySaveUpdate(string filename, string filePath, string name, string ParentId, string ActiveOnPortal)
         {
             if (ActiveOnPortal == "true") { ActiveOnPortal = "1"; } else { ActiveOnPortal = "0"; }
             DataTable dt = new DataTable();
@@ -97,8 +97,6 @@ namespace TaskAPI.Models
             cmd.Parameters.AddWithValue("@ParentId", ParentId);
             cmd.Parameters.AddWithValue("@filename", filename);
             cmd.Parameters.AddWithValue("@filePath", filePath);
-            cmd.Parameters.AddWithValue("@BannerImage", Bannerfilename);
-            cmd.Parameters.AddWithValue("@BannnerfilePath", bannerfilePath);
             cmd.Parameters.AddWithValue("@ActiveOnPortal", ActiveOnPortal);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -296,6 +294,22 @@ namespace TaskAPI.Models
             cmd.Dispose();
             con.Close();
             return dt;
+        }
+        public string CategoryBannerImageUpdate(string filename, string filePath, string ParentId)
+        {
+           
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand cmd = new SqlCommand("Category_UpdateBanner", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ParentId", ParentId);
+            cmd.Parameters.AddWithValue("@BannerImage", filename);
+            cmd.Parameters.AddWithValue("@BannnerfilePath", filePath);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = "Record Insert";
+            return Return;
         }
 
     }
