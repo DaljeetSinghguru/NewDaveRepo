@@ -312,5 +312,27 @@ namespace TaskAPI.Models
             return Return;
         }
 
+        public DataTable GetItemDetailByStockCode(string StockCode)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetItemDetailByStockCode", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemStockCode", StockCode);
+
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
     }
 }

@@ -518,7 +518,8 @@ namespace Slimapi.Controllers
         {
             string Return = "";
             var selectedAccessoriesArry = SelectedRelatedItems.Split(':');
-            
+
+            objModels.delete_selectedAccessories(ItemStockCode);
             for (int i = 0; i < selectedAccessoriesArry.Length; i++)
             {
                 Return = objModels.Insert_selectedRelatedItems(ItemStockCode, selectedAccessoriesArry[i]);
