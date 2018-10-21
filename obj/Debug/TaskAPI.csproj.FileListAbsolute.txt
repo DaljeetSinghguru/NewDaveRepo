@@ -562,4 +562,3 @@ D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csproj.CoreCompileInputs.cache
 D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csproj.CopyComplete
 D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.dll
 D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.pdb
-D:\21092018\NewDaveRepo\obj\Debug\TaskAPI.csprojAssemblyReference.cache
