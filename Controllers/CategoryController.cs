@@ -678,5 +678,102 @@ namespace TaskAPI.Controllers
             return result;
         }
 
+
+        [HttpGet]
+        public IEnumerable<Category_Class> Category_Get1920()
+        {
+            List<Category_Class> list = new List<Category_Class>();
+            DataTable dt = objModels.Category_Get1920();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Category_Class()
+                    {
+                        CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
+                     
+                        MainBannerName= Convert.ToString(dr["MainBannerName"]),
+                        MainBannerFilePath = Convert.ToString(dr["MainBannerFilePath"]),
+                        ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
+                        ParentName = Convert.ToString(dr["ParentName"]),
+                    });
+                }
+            }
+            return list;
+        }
+        [HttpGet]
+        public IEnumerable<Category_Class> Category_Get870()
+        {
+            List<Category_Class> list = new List<Category_Class>();
+            DataTable dt = objModels.Category_Get870();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Category_Class()
+                    {
+                        CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
+
+                        CategoryImageName870 = Convert.ToString(dr["CategoryImageName870"]),
+                        CategoryImagePath870 = Convert.ToString(dr["CategoryImageName870"]),
+                        ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
+                        ParentName = Convert.ToString(dr["ParentName"]),
+                    });
+                }
+            }
+            return list;
+        }
+        [HttpGet]
+        public IEnumerable<Category_Class> Category_Get570()
+        {
+            List<Category_Class> list = new List<Category_Class>();
+            DataTable dt = objModels.Category_Get570();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Category_Class()
+                    {
+                        CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
+
+                        CategoryImageName570 = Convert.ToString(dr["CategoryImageName570"]),
+                        CategoryImagePath570 = Convert.ToString(dr["CategoryImageName570"]),
+                        ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
+                        ParentName = Convert.ToString(dr["ParentName"]),
+                    });
+                }
+            }
+            return list;
+        }
+        [HttpGet]
+        public IEnumerable<Category_Class> Category_Get370()
+        {
+            List<Category_Class> list = new List<Category_Class>();
+            DataTable dt = objModels.Category_Get370();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Category_Class()
+                    {
+                        CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        IsParentId = Convert.ToString(dr["IsParentId"]),
+
+                        CategoryImageName370 = Convert.ToString(dr["CategoryImageName370"]),
+                        CategoryImagePath370 = Convert.ToString(dr["CategoryImageName370"]),
+                        ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
+                        ParentName = Convert.ToString(dr["ParentName"]),
+                    });
+                }
+            }
+            return list;
+        }
     }
 }

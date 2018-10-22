@@ -19,5 +19,15 @@ namespace TaskAPI.BOL
         public string filePath { get; set; }
         public string ActiveOnPortal { get; set; }
         public string ParentName { get; set; }
+        public string MainBannerName { get; set; }
+        public string MainBannerFilePath { get; set; }
+        public string CategoryImageName370 { get; set; }
+        public string CategoryImagePath370 { get; set; }
+
+        public string CategoryImageName570 { get; set; }
+        public string CategoryImagePath570 { get; set; }
+        public string CategoryImageName870 { get; set; }
+        public string CategoryImagePath870 { get; set; }
+
     }
 }
