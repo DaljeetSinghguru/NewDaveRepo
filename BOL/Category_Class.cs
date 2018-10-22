@@ -13,6 +13,9 @@ namespace TaskAPI.BOL
         public string RowId { get; set; }
         public string IsParentId { get; set; }
         public string filename { get; set; }
+        public string BannerImage { get; set; }
+        public string BannerfilePath { get; set; }
+
         public string filePath { get; set; }
         public string ActiveOnPortal { get; set; }
         public string ParentName { get; set; }

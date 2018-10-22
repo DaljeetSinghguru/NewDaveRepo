@@ -235,6 +235,21 @@ namespace TaskAPI.Models
             string Return = "Record Insert";
             return Return;
         }
+
+        public string delete_selectedAccessories(string a)
+        {
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            SqlCommand cmd = new SqlCommand("delete_selectedRelatedItems", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemStockCode", a);
+           
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            string Return = "Record Insert";
+            return Return;
+        }
+
         public string Insert_selectedRelatedItems(string a, string b)
         {
             SqlConnection con = new SqlConnection(objCon.ConnectionReturn());

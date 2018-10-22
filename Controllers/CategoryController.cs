@@ -143,7 +143,7 @@ namespace TaskAPI.Controllers
                 var ActiveOnPortal = httpRequest.Form.Get(2);
                 string msg = "";
 
-                msg = new Category_Models().CategorySaveUpdate(filename[0], filepathname[0], filename[1], filepathname[1], CategoryName, IsParentMenuId, ActiveOnPortal);
+                msg = new Category_Models().CategorySaveUpdate(filename[0], filepathname[0], CategoryName, IsParentMenuId, ActiveOnPortal);
 
                 if (msg != "")
                 {
@@ -181,6 +181,8 @@ namespace TaskAPI.Controllers
                         IsParentId = Convert.ToString(dr["IsParentId"]),
                         filename = Convert.ToString(dr["filename"]),
                         filePath = Convert.ToString(dr["filePath"]),
+                       // BannerfilePath = Convert.ToString(dr["BannnerfilePath"]),
+                       // BannerImage = Convert.ToString(dr["BannerImage"]),
                         ActiveOnPortal = Convert.ToString(dr["ActiveOnPortal"]),
                         ParentName = Convert.ToString(dr["ParentName"]),
                     });
@@ -397,5 +399,284 @@ namespace TaskAPI.Controllers
             }
             return list;
         }
+
+        [HttpPost]
+
+        public HttpResponseMessage SaveBannerImageCategory()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var IsParentMenuId = httpRequest.Form.Get(0);
+             
+                string msg = "";
+
+                msg = new Category_Models().CategoryBannerImageUpdate(filename[0], filepathname[0],  IsParentMenuId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
+
+        [HttpGet]
+        public IEnumerable<Item_Class> GetItemDetailByStockCode(string ItemStockCode)
+        {
+            List<Item_Class> list = new List<Item_Class>();
+            DataTable dt = objModels.GetItemDetailByStockCode(ItemStockCode);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Item_Class()
+                    {
+                        CategoryId = Convert.ToString(dr["CategoryId"]),
+                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        Active = Convert.ToString(dr["Active"]),
+                        ASIN = Convert.ToString(dr["ASIN"]),
+                        BrandId = Convert.ToString(dr["BrandId"]),
+                        BrandName = Convert.ToString(dr["BrandName"]),
+                        Description = Convert.ToString(dr["Description"]),
+                        ItemId = Convert.ToString(dr["ItemId"]),
+                        ItemImage1 = Convert.ToString(dr["ItemImage1"]),
+                        ItemImage2 = Convert.ToString(dr["ItemImage2"]),
+                        ItemMainImage = Convert.ToString(dr["ItemMainImage"]),
+                        ItemMainImageUrl = Convert.ToString(dr["ItemMainImageUrl"]),
+                        ItemMainImageUrl1 = Convert.ToString(dr["ItemMainImageUrl1"]),
+                        ItemMainImageUrl2 = Convert.ToString(dr["ItemMainImageUrl2"]),
+                        ItemStockCode = Convert.ToString(dr["ItemStockCode"]),
+                        MetaDescription = Convert.ToString(dr["MetaDescription"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        Price = Convert.ToString(dr["Price"]),
+                        SearchKeyword = Convert.ToString(dr["SearchKeyword"]),
+                        SKU = Convert.ToString(dr["SKU"]),
+                        StockInHand = Convert.ToString(dr["StockInHand"]),
+                        Title = Convert.ToString(dr["Title"]),
+                        Vat = Convert.ToString(dr["Vat"]),
+                    });
+                }
+            }
+            return list;
+        }
+
+        [HttpPost]
+
+        public HttpResponseMessage SaveBannerImageCategory870()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var IsParentMenuId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Category_Models().CategoryBannerImageUpdate870(filename[0], filepathname[0], IsParentMenuId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+        [HttpPost]
+
+        public HttpResponseMessage SaveBannerImageCategory370()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var IsParentMenuId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Category_Models().CategoryBannerImageUpdate370(filename[0], filepathname[0], IsParentMenuId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+        [HttpPost]
+
+        public HttpResponseMessage SaveBannerImageCategory570()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var IsParentMenuId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Category_Models().CategoryBannerImageUpdate570(filename[0], filepathname[0], IsParentMenuId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+        [HttpPost]
+
+        public HttpResponseMessage SaveBannerImageCategory1920()
+        {
+            string[] filename = new string[10];
+            string[] filepathname = new string[10];
+            int i = 0;
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filenameWithHrUserId = httpRequest.Form.Get(0) + '_' + postedFile.FileName;
+
+                    var filePath = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + filenameWithHrUserId;
+                    //string filePath = HttpContext.Current.Server.MapPath("/StudentImage/") + filenameWithHrUserId;
+                    //string filePath = Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), postedFile.FileName));
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    filename[i] = Convert.ToString(filenameWithHrUserId);
+                    filepathname[i] = Convert.ToString(filePath);
+                    i = i + 1;
+
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                var IsParentMenuId = httpRequest.Form.Get(0);
+
+                string msg = "";
+
+                msg = new Category_Models().CategoryBannerImageUpdate1920(filename[0], filepathname[0], IsParentMenuId);
+
+                if (msg != "")
+                {
+                    result = Request.CreateResponse(JsonConvert.SerializeObject(msg));
+                }
+                //return data;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
+        }
+
     }
 }
