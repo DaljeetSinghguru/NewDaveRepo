@@ -290,8 +290,8 @@ namespace TaskAPI.Controllers
                 {
                     list.Add(new Item_Class()
                     {
-                        CategoryId = Convert.ToString(dr["CategoryId"]),
-                        CategoryName = Convert.ToString(dr["CategoryName"]),
+                        //CategoryId = Convert.ToString(dr["CategoryId"]),
+                       // CategoryName = Convert.ToString(dr["CategoryName"]),
                         Active = Convert.ToString(dr["Active"]),
                         ASIN = Convert.ToString(dr["ASIN"]),
                         BrandId = Convert.ToString(dr["BrandId"]),
