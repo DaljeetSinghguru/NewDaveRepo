@@ -775,5 +775,34 @@ namespace TaskAPI.Controllers
             }
             return list;
         }
+
+
+
+
+        
+        [HttpGet]
+        public IEnumerable<GetCategory_Class> GetChildCategoryByCategoryId(string Categoryid)
+        {
+            List<GetCategory_Class> list = new List<GetCategory_Class>();
+            DataTable dt = objModels.GetChildCategoryByCategoryId(Categoryid);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new GetCategory_Class()
+                    {
+                        CategoryId = Convert.ToString(dr["CategoryId"]),
+                        text = Convert.ToString(dr["CategoryName"]),
+                        Description = Convert.ToString(dr["Description"]),
+
+                        filename = Convert.ToString(dr["filename"]),
+                        filePath = Convert.ToString(dr["filePath"]),
+                        Value = Convert.ToString(dr["CategoryId"]),
+                    });
+                }
+            }
+            return list;
+        }
+
     }
 }

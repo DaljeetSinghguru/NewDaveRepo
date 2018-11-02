@@ -483,5 +483,27 @@ namespace TaskAPI.Models
             con.Close();
             return dt;
         }
+        public DataTable GetChildCategoryByCategoryId(string Categoryid)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("GetChildCategoryByCategoryId", con);
+            cmd.Parameters.AddWithValue("@Categoryid", Categoryid);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
     }
 }
