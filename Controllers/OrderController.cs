@@ -62,7 +62,40 @@ namespace TaskAPI.Controllers
 
         }
 
+        [HttpGet]
+        public IEnumerable<Order_Class> getordercustomerwise(string custid)
+        {
+            List<Order_Class> list = new List<Order_Class>();
+            DataTable dt = objModels.getordercustomerwise(custid);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    list.Add(new Order_Class()
+                    {
+                        CustId = Convert.ToString(dr["CustId"]),
+                        Date = Convert.ToString(dr["Date"]),
+                        ShopHistoryId = Convert.ToString(dr["ShopHistoryId"]),
+                        Name = Convert.ToString(dr["Name"]),
+                        PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                        Email = Convert.ToString(dr["Email"]),
+                        HouseNo = Convert.ToString(dr["HouseNo"]),
+                        AddressLine2 = Convert.ToString(dr["AddressLine2"]),
+                        AddressLine3 = Convert.ToString(dr["AddressLine3"]),
+                        AddressLine4 = Convert.ToString(dr["AddressLine4"]),
+                        PostCode = Convert.ToString(dr["PostCode"]),
+                        InvoiceName = Convert.ToString(dr["InvoiceName"]),
+                        Company = Convert.ToString(dr["Company"]),
+                        InvoiceAddessLine2 = Convert.ToString(dr["InvoiceAddessLine2"]),
+                        InvoiceAddressLine3 = Convert.ToString(dr["InvoiceAddressLine3"]),
+                        InvoiceAddressLine4 = Convert.ToString(dr["InvoiceAddressLine4"]),
+                        InvoicePostCode = Convert.ToString(dr["InvoicePostCode"]),
 
+                    });
+                }
+            }
+            return list;
+        }
 
     }
 }

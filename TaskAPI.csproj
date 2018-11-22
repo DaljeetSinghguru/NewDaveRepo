@@ -142,6 +142,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BOL\Accessries_Class.cs" />
+    <Compile Include="BOL\Order_Class.cs" />
     <Compile Include="BOL\GetCategory_Class.cs" />
     <Compile Include="BOL\Shipping_Class.cs" />
     <Compile Include="BOL\Customer_Class.cs" />

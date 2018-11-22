@@ -42,5 +42,29 @@ namespace TaskAPI.Models
             string Return = Convert.ToString(cmd.Parameters["@Return"].Value);
             return Return;
         }
+
+
+        public DataTable getordercustomerwise(string custid)
+        {
+
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(objCon.ConnectionReturn());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Getorderhistory", con);
+            cmd.Parameters.Add("@custid", SqlDbType.NVarChar, 50).Value = custid;
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            cmd.Dispose();
+            con.Close();
+            return dt;
+        }
     }
 }
