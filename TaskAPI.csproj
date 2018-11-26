@@ -142,6 +142,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BOL\Accessries_Class.cs" />
+    <Compile Include="BOL\SendComment_Class.cs" />
+    <Compile Include="BOL\Blog_Class.cs" />
     <Compile Include="BOL\Order_Class.cs" />
     <Compile Include="BOL\GetCategory_Class.cs" />
     <Compile Include="BOL\Shipping_Class.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="BOL\SubCategory_Class.cs" />
     <Compile Include="BOL\Userlogin_Class.cs" />
     <Compile Include="Controllers\BraintreeConfigurationController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\IBraintreeConfiguration.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Blog_Models.cs" />
     <Compile Include="Models\Customer_Models.cs" />
     <Compile Include="Models\Shipping_Models.cs" />
     <Compile Include="Models\MailSent.cs" />
